@@ -1,0 +1,22 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@200&display=swap");
+.navbar {
+  background-color: black;
+  color: white;
+  display: flex;
+  overflow: hidden;
+  font-family: "Montserrat", sans-serif;
+  justify-content: center;
+  align-items: center;
+}
+
+.inner-navbar {
+  width: 90%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.navbar-ul {
+  list-style-type: none;
+}
+
+/*# sourceMappingURL=output.css.map */

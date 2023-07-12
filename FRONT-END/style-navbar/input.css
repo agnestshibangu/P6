@@ -1,0 +1,9 @@
+.navbar {
+  background-color: lightblue;
+  display: flex;
+  overflow: hidden;
+}
+
+.navbar-ul {
+  list-style-type: none;
+}/*# sourceMappingURL=input.css.map */

@@ -1,11 +1,12 @@
 .small-divs-main-box {
-    margin-top: 30px;
+    margin-top: 120px;
     width: 100%;
     height: 50vh;
     background-color: red;
     display: flex;
     justify-content: space-evenly;
     align-items: center;  
+    
 }
 
 .small-single-div {
@@ -14,16 +15,16 @@
     background-color: pink;
 }
 
-@media only screen and (max-width: 600px) {
-    .small-divs-main-box {
-        flex-direction: column;
-        height: 500vh;
-        justify-content: space-evenly;
-    }
+// @media only screen and (max-width: 600px) {
+//     .small-divs-main-box {
+//         flex-direction: column;
+//         height: 500vh;
+//         justify-content: space-evenly;
+//     }
 
-    .small-single-div {
-        width: 90%;
-        height: 10%;
-        background-color: pink;
-    }
-  }
+//     .small-single-div {
+//         width: 90%;
+//         height: 10%;
+//         background-color: pink;
+//     }
+//   }

@@ -44,6 +44,7 @@ async function SearchSevenBestRatedMovie() {
 
     for (let i = 0; i < movies.results.length; i++) {
         idList.push(movies.results[i].id);
+        console.log(i);
         console.log(idList);
     }
 
@@ -104,9 +105,6 @@ async function fetchBestMovieDetails(id) {
 
 }
 
-
-
-
 async function fetchMovieDetails(id) {
 
     const url = "http://localhost:8000/api/v1/titles/" + id;
@@ -148,6 +146,47 @@ async function fetchMovieDetails(id) {
 }
 
 
+async function fetchMovieDetailsForCategories(currentId, positionNumber) {
+
+    console.log(positionNumber);
+
+    const url = "http://localhost:8000/api/v1/titles/" + currentId;
+    const response = await fetch(url);
+    const movie = await response.json();
+    //console.log(movie);
+    console.log(movie.title);
+    // console.log(movie.image_url);
+    // console.log(movie.genres);
+    // console.log(movie.date_published);
+    // console.log(movie.rated);
+    // console.log(movie.imdb_score);
+    // console.log(movie.directors);
+    // console.log(movie.actors);
+    // console.log(movie.duration);
+    // console.log(movie.countries);
+    // console.log(movie.description);
+
+
+    // Retrieve the desired movie details
+    const title = movie.title;
+    const ImageUrl = movie.image_url;
+    const genres = movie.genres;
+    const date_published = movie.date_published;
+    const rated = movie.rated;
+    const imdb_score = movie.imdb_score;
+    const directors = movie.directors;
+    const actors = movie.actors;
+    const duration = movie.duration;
+    const countries = movie.countries;
+    const description = movie.description;
+
+    
+    // // Update the HTML elements with movie details
+    document.getElementById("title-other-movies-" + [positionNumber]).innerText = title;
+    document.getElementById("imgimg-" + [positionNumber]).src = ImageUrl;
+    document.getElementById("bestRatedMovies-description").innerText = description;
+
+}
 
 
 
@@ -172,11 +211,13 @@ async function searchAndProcessSevenMovies() {
     try {
         const idList = await SearchSevenBestRatedMovie();
         console.log(idList);
-        for (let i = 0; i < idList.length; i++)
+        for (let i = 1; i < idList.length; i++)
         {
             let currentId = idList[i];
+            let positionNumber = i;
             console.log(currentId);
-            fetchMovieDetails(currentId);
+            console.log(positionNumber);
+            fetchMovieDetailsForCategories(currentId, positionNumber);
         }
        
     } catch (error) {
@@ -187,7 +228,7 @@ async function searchAndProcessSevenMovies() {
 // Call the searchAndProcessMovie function
 searchAndProcessMovie();
 
-// searchAndProcessSevenMovies()
+searchAndProcessSevenMovies()
 
 
 

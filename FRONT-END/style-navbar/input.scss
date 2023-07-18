@@ -4,20 +4,24 @@ $font-stack: Helvetica, sans-serif;
 $navbar-bg-color: black;
 $navbar-color: white;
 
-.navbar {
+.header {
+  height: 100px;
+  width: 100%;
   background-color: $navbar-bg-color;
   color: $navbar-color;
-  display: flex;
   overflow: hidden;
   font-family: 'Montserrat', sans-serif;
+  display: flex;
   justify-content: center;
   align-items: center;
+
 }
 
 .inner-navbar {
   width: 90%;
   margin-top: 10px;
   margin-bottom: 10px;
+  padding-left: 0;
 }
 
 .navbar-ul {

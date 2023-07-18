@@ -97,9 +97,10 @@ async function fetchBestMovieDetails(id) {
 
 
     // // Update the HTML elements with movie details
-    document.getElementById("bestRatedMovies-title").innerText = title;
+
     document.getElementById("bestRatedMovies-img").src = ImageUrl;
-    document.getElementById("bestRatedMovies-description").innerText = description;
+    // document.getElementById("bestRatedMovies-title").innerText = title;
+    // document.getElementById("bestRatedMovies-description").innerText = description;
 
 }
 

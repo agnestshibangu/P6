@@ -91,7 +91,7 @@
     right: 0;
     bottom: 0;
     left: 0;
-    height: 300px;
+    height: 800px;
     display: flex;
     overflow-x: scroll;
     counter-reset: item;
@@ -103,13 +103,14 @@
     position: relative;
     flex: 0 0 100%;
     width: 100%;
-    // background-color: #f99;
+    //background-color: #f99;
     counter-increment: item;
+    height: 400px;
   }
   
-  .carousel__slide:nth-child(even) {
-    background-color: #99f;
-  }
+  // .carousel__slide:nth-child(even) {
+  //   //background-color: #99f;
+  // }
   
   .carousel__slide:before {
     content: counter(item);
@@ -225,4 +226,5 @@
   .carousel::after {
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpolygon points='100,50 20,100 20,0' fill='%23fff'/%3E%3C/svg%3E");
   }
-  
+
+ 

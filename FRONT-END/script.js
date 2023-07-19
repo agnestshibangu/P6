@@ -23,15 +23,15 @@
 // étape 1
 // retourne le film le mieux noté toutes catégories confondues
 
-async function GetMovieId() {
-    const url = "http://localhost:8000/api/v1/titles/?sort_by=-imdb_score";
-    const response = await fetch(url);
-    const movies = await response.json();
-    console.log(movies.results[0].id)
-    let id = movies.results[0].id
+// async function GetMovieId() {
+//     const url = "http://localhost:8000/api/v1/titles/?sort_by=-imdb_score";
+//     const response = await fetch(url);
+//     const movies = await response.json();
+//     console.log(movies.results[0].id)
+//     let id = movies.results[0].id
 
-    return id;
-}
+//     return id;
+// }
 
 // étape 2
 // 7 autres meilleurs films toutes catégories confondues
@@ -52,6 +52,7 @@ async function SearchSevenBestRatedMovie() {
 
     return idList;
 }
+
 
 
 
@@ -105,12 +106,17 @@ async function fetchBestMovieDetails(id) {
 
 }
 
-async function fetchMovieDetails(id) {
 
-    const url = "http://localhost:8000/api/v1/titles/" + id;
+// fetch data for the best movie
+async function fetchMovieDetails() {
+
+    const url = "http://localhost:8000/api/v1/titles/?sort_by=-imdb_score"
     const response = await fetch(url);
-    const movie = await response.json();
-    //console.log(movie);
+    const movies = await response.json();
+    console.log(movies);
+    const movie = movies.results[0]
+    console.log(movie.title);
+    //console.log(movie.description);
     // console.log(movie.title);
     // console.log(movie.image_url);
     // console.log(movie.genres);
@@ -139,9 +145,9 @@ async function fetchMovieDetails(id) {
 
 
     // // Update the HTML elements with movie details
-    document.getElementById("bestRatedMovies-title").innerText = title;
-    document.getElementById("bestRatedMovies-img").src = ImageUrl;
-    document.getElementById("bestRatedMovies-description").innerText = description;
+    document.getElementById("title-movie-0").innerText = title;
+    document.getElementById("big-div-img-0").src = ImageUrl;
+    // document.getElementById("description-movie-0").innerText = description;
 
 }
 
@@ -149,12 +155,22 @@ async function fetchMovieDetails(id) {
 async function fetchMovieDetailsForCategories(currentId, positionNumber) {
 
     console.log(positionNumber);
+    console.log(currentId);
 
-    const url = "http://localhost:8000/api/v1/titles/" + currentId;
-    const response = await fetch(url);
-    const movie = await response.json();
-    //console.log(movie);
+
+    let url = "http://localhost:8000/api/v1/titles/" + currentId;
+    console.log(url);
+    let response = await fetch(url);
+    let movie = await response.json();
+
+    console.log(movie);
     console.log(movie.title);
+    
+    
+
+
+
+
     // console.log(movie.image_url);
     // console.log(movie.genres);
     // console.log(movie.date_published);
@@ -167,24 +183,34 @@ async function fetchMovieDetailsForCategories(currentId, positionNumber) {
     // console.log(movie.description);
 
 
-    // Retrieve the desired movie details
-    const title = movie.title;
-    const ImageUrl = movie.image_url;
-    const genres = movie.genres;
-    const date_published = movie.date_published;
-    const rated = movie.rated;
-    const imdb_score = movie.imdb_score;
-    const directors = movie.directors;
-    const actors = movie.actors;
-    const duration = movie.duration;
-    const countries = movie.countries;
-    const description = movie.description;
+    // // Retrieve the desired movie details
+    // const title = movie.title;
+    // const ImageUrl = movie.image_url;
+    // const genres = movie.genres;
+    // const date_published = movie.date_published;
+    // const rated = movie.rated;
+    // const imdb_score = movie.imdb_score;
+    // const directors = movie.directors;
+    // const actors = movie.actors;
+    // const duration = movie.duration;
+    // const countries = movie.countries;
+    // const description = movie.description;
+
+    // // console.log(positionNumber);
+    
+    // // Single best movie
+    // if (positionNumber == 0) {
+    //     document.getElementById("title-other-movies-" + [positionNumber]).innerText = title;
+    //     document.getElementById("imgimg-" + [positionNumber]).src = ImageUrl;
+    // }
+
+
 
     
-    // // Update the HTML elements with movie details
-    document.getElementById("title-other-movies-" + [positionNumber]).innerText = title;
-    document.getElementById("imgimg-" + [positionNumber]).src = ImageUrl;
-    document.getElementById("bestRatedMovies-description").innerText = description;
+    // // // Update the HTML elements with movie details
+    // document.getElementById("title-other-movies-" + [positionNumber]).innerText = title;
+    // document.getElementById("imgimg-" + [positionNumber]).src = ImageUrl;
+    // document.getElementById("bestRatedMovies-description").innerText = description;
 
 }
 
@@ -197,26 +223,35 @@ function someOtherFunction(id) {
     console.log("The best rated movie id is: " + id);
 }
 
-// Call the SearchBestRatedMovie single best movie 
-async function searchAndProcessMovie() {
+// Fetch data for single best movies
+async function searchAndProcessSingleMovie() {
     try {
-        const id = await GetMovieId();
-        fetchMovieDetails(id);
+        // const id = await GetMovieId();
+        //   fetchMovieDetails(id);
+        fetchMovieDetails();
     } catch (error) {
         console.error(error);
     }
 }
 
-async function searchAndProcessSevenMovies() {
+async function searchAndProcessMovies() {
     try {
+        // meilleur film
+        const singleMovie = await fetchBestMovieDetails(id);
+        
+        // 7 meilleurs films
+
+        // 7 meilleurs films cat1
+
+        // 7 meilleurs films cat2
+        
+       
         const idList = await SearchSevenBestRatedMovie();
         console.log(idList);
-        for (let i = 1; i < idList.length; i++)
+        for (let i = 0; i < idList.length; i++)
         {
             let currentId = idList[i];
             let positionNumber = i;
-            console.log(currentId);
-            console.log(positionNumber);
             fetchMovieDetailsForCategories(currentId, positionNumber);
         }
        
@@ -226,9 +261,9 @@ async function searchAndProcessSevenMovies() {
 }
 
 // Call the searchAndProcessMovie function
-searchAndProcessMovie();
+searchAndProcessSingleMovie() 
 
-searchAndProcessSevenMovies()
+searchAndProcessMovies()
 
 
 

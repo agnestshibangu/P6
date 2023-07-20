@@ -166,9 +166,8 @@ async function fetchMovieDetails() {
     const url = "http://localhost:8000/api/v1/titles/?sort_by=-imdb_score"
     const response = await fetch(url);
     const movies = await response.json();
-    console.log(movies);
+
     const movie = movies.results[0]
-    console.log(movie.title);
     //console.log(movie.description);
     // console.log(movie.title);
     // console.log(movie.image_url);
@@ -198,9 +197,9 @@ async function fetchMovieDetails() {
 
 
     // // Update the HTML elements with movie details
-    document.getElementById("title-movie-0").innerText = title;
+    document.getElementById("title-movie-big-div").innerText = title;
     document.getElementById("big-div-img-0").src = ImageUrl;
-    // document.getElementById("description-movie-0").innerText = description;
+    // document.getElementById("description-movie-big-div").innerText = description;
 
 }
 
@@ -231,7 +230,7 @@ async function fetchMovieDetailsForCategories(currentId, positionNumber) {
 
 
     // // Retrieve the desired movie details
-    // const title = movie.title;
+    const title = movie.title;
     const imageUrl = movie.image_url;
     // const genres = movie.genres;
     // const date_published = movie.date_published;
@@ -255,8 +254,8 @@ async function fetchMovieDetailsForCategories(currentId, positionNumber) {
 
     console.log(imageUrl)
     // // // Update the HTML elements with movie details
-    // document.getElementById("title-other-movies-" + [positionNumber]).innerText = title;
     document.getElementById("imgimg-"+ [positionNumber]).src = imageUrl;
+    document.getElementById("title-movie-" + [positionNumber]).innerText = title;
     
 
     // document.getElementById("bestRatedMovies-description").innerText = description;

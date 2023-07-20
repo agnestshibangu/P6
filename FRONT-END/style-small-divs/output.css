@@ -22,4 +22,13 @@
   margin-top: 120px;
 }
 
+.title-movie {
+  position: absolute;
+  font-family: "Montserrat", sans-serif;
+  font-size: 40px;
+  overflow-wrap: break-word;
+  color: white;
+  z-index: 5;
+}
+
 /*# sourceMappingURL=output.css.map */

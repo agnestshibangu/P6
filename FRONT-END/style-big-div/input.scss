@@ -20,6 +20,13 @@ $navbar-bg-color: rgb(255, 88, 88);
     position: relative;
 }
 
+.title-movie-big-div, .description-movie-big-div {
+    font-family: "Montserrat", sans-serif;
+    font-size: 40px;
+    overflow-wrap: break-word;
+    color: white;
+}
+
 .over-layer {
     width: 100%;
     height: 400px;
@@ -68,13 +75,7 @@ $navbar-bg-color: rgb(255, 88, 88);
     
 }
 
-#title-movie-0, #description-movie-0 {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 40px;
-    overflow-wrap: break-word;
-    color: white;
-    z-index: 5;
-}
+
 
 #bestRatedMovies-description {
     font-size: 10px;

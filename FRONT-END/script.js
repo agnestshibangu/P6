@@ -13,45 +13,105 @@
 // étape 5
 // 7 films les mieux notés d'une catégorie
 
-
-
-
-
-
-
-
-// étape 1
-// retourne le film le mieux noté toutes catégories confondues
-
-// async function GetMovieId() {
-//     const url = "http://localhost:8000/api/v1/titles/?sort_by=-imdb_score";
-//     const response = await fetch(url);
-//     const movies = await response.json();
-//     console.log(movies.results[0].id)
-//     let id = movies.results[0].id
-
-//     return id;
-// }
-
 // étape 2
-// 7 autres meilleurs films toutes catégories confondues
 
+// 7 best movies all categories 
 async function SearchSevenBestRatedMovie() {
     const url = "http://localhost:8000/api/v1/titles/?sort_by=-imdb_score";
+    const url2 = "http://localhost:8000/api/v1/titles/?page=2&sort_by=-imdb_score";
     const response = await fetch(url);
+    const response2 = await fetch(url2);
     const movies = await response.json();
+    const movies2 = await response2.json();
     let idList = [];
 
     for (let i = 0; i < movies.results.length; i++) {
         idList.push(movies.results[i].id);
-        console.log(i);
-        console.log(idList);
+    }
+
+    for (let i = 0; i < 2; i++) {
+        idList.push(movies2.results[i].id);
     }
 
     console.log(idList);
 
     return idList;
 }
+
+
+// 7 best movies category BIOGRAPHY 
+async function SearchSevenBestRatedMovieCat1() {
+    const url = "http://localhost:8000/api/v1/titles/?genre=biography&sort_by=-imdb_score";
+    const url2 = "http://localhost:8000/api/v1/titles/?genre=biography&page=2&sort_by=-imdb_score";
+    const response = await fetch(url);
+    const response2 = await fetch(url2);
+    const movies = await response.json();
+    const movies2 = await response2.json();
+    let idList = [];
+
+    for (let i = 0; i < movies.results.length; i++) {
+        idList.push(movies.results[i].id);
+    }
+    for (let i = 0; i < 2; i++) {
+        idList.push(movies2.results[i].id);
+    }
+
+    console.log(idList);
+
+    return idList;
+}
+
+// 7 best movies category MUSIC
+async function SearchSevenBestRatedMovieCat2() {
+    const url = "http://localhost:8000/api/v1/titles/?genre=Music&sort_by=-imdb_score";
+    const url2 = "http://localhost:8000/api/v1/titles/?genre=Music&page=2&sort_by=-imdb_score";
+    const response = await fetch(url);
+    const response2 = await fetch(url2);
+    const movies = await response.json();
+    const movies2 = await response2.json();
+    let idList = [];
+
+    
+    for (let i = 0; i < movies.results.length; i++) {
+        idList.push(movies.results[i].id);
+    }
+    for (let i = 0; i < 2; i++) {
+        idList.push(movies2.results[i].id);
+    }
+
+    console.log(idList);
+
+    return idList;
+}
+
+// 7 best movies category THRILLER
+async function SearchSevenBestRatedMovieCat3() {
+    const url = "http://localhost:8000/api/v1/titles/?genre=Thriller&sort_by=-imdb_score";
+    const url2 = "http://localhost:8000/api/v1/titles/?genre=Thriller&page=2&sort_by=-imdb_score";
+    const response = await fetch(url);
+    const response2 = await fetch(url2);
+    const movies = await response.json();
+    const movies2 = await response2.json();
+    let idList = [];
+
+    
+    for (let i = 0; i < movies.results.length; i++) {
+        idList.push(movies.results[i].id);
+    }
+    for (let i = 0; i < 2; i++) {
+        idList.push(movies2.results[i].id);
+    }
+
+    console.log(idList);
+
+    return idList;
+}
+
+SearchSevenBestRatedMovie();
+SearchSevenBestRatedMovieCat1();
+SearchSevenBestRatedMovieCat2();
+SearchSevenBestRatedMovieCat3();
+
 
 
 
@@ -164,13 +224,8 @@ async function fetchMovieDetailsForCategories(currentId, positionNumber) {
     let movie = await response.json();
 
     console.log(movie);
-    console.log(movie.title);
+    console.log(movie.image_url);
     
-    
-
-
-
-
     // console.log(movie.image_url);
     // console.log(movie.genres);
     // console.log(movie.date_published);
@@ -185,7 +240,7 @@ async function fetchMovieDetailsForCategories(currentId, positionNumber) {
 
     // // Retrieve the desired movie details
     // const title = movie.title;
-    // const ImageUrl = movie.image_url;
+    const imageUrl = movie.image_url;
     // const genres = movie.genres;
     // const date_published = movie.date_published;
     // const rated = movie.rated;
@@ -206,10 +261,12 @@ async function fetchMovieDetailsForCategories(currentId, positionNumber) {
 
 
 
-    
+    console.log(imageUrl)
     // // // Update the HTML elements with movie details
     // document.getElementById("title-other-movies-" + [positionNumber]).innerText = title;
-    // document.getElementById("imgimg-" + [positionNumber]).src = ImageUrl;
+    document.getElementById("imgimg-"+ [positionNumber]).src = imageUrl;
+    
+
     // document.getElementById("bestRatedMovies-description").innerText = description;
 
 }
@@ -226,8 +283,6 @@ function someOtherFunction(id) {
 // Fetch data for single best movies
 async function searchAndProcessSingleMovie() {
     try {
-        // const id = await GetMovieId();
-        //   fetchMovieDetails(id);
         fetchMovieDetails();
     } catch (error) {
         console.error(error);
@@ -237,7 +292,7 @@ async function searchAndProcessSingleMovie() {
 async function searchAndProcessMovies() {
     try {
         // meilleur film
-        const singleMovie = await fetchBestMovieDetails(id);
+        
         
         // 7 meilleurs films
 
@@ -248,7 +303,7 @@ async function searchAndProcessMovies() {
        
         const idList = await SearchSevenBestRatedMovie();
         console.log(idList);
-        for (let i = 0; i < idList.length; i++)
+        for (let i = 1; i < idList.length; i++)
         {
             let currentId = idList[i];
             let positionNumber = i;

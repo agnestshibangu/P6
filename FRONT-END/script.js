@@ -107,13 +107,6 @@ async function SearchSevenBestRatedMovieCat3() {
     return idListCat3;
 }
 
-SearchSevenBestRatedMovie();
-SearchSevenBestRatedMovieCat1();
-SearchSevenBestRatedMovieCat2();
-SearchSevenBestRatedMovieCat3();
-
-
-
 
 
 // étape 3
@@ -217,8 +210,6 @@ async function fetchMovieDetailsForCategories(currentId, positionNumber) {
     console.log(positionNumber);
     console.log(currentId);
 
-
-
     let url = "http://localhost:8000/api/v1/titles/" + currentId;
     console.log(url);
     let response = await fetch(url);
@@ -317,7 +308,7 @@ async function searchAndProcessMovies() {
         for (let i = 0; i < idListCat1.length; i++)
         {
             let currentId = idListCat1[i];
-            let positionNumber = i;
+            let positionNumber = i + 7;
             fetchMovieDetailsForCategories(currentId, positionNumber);
         }
        
@@ -332,7 +323,7 @@ async function searchAndProcessMovies() {
         for (let i = 0; i < idListCat2.length; i++)
         {
             let currentId = idListCat2[i];
-            let positionNumber = i;
+            let positionNumber = i + 14;
             fetchMovieDetailsForCategories(currentId, positionNumber);
         }
        
@@ -347,7 +338,7 @@ async function searchAndProcessMovies() {
         for (let i = 0; i < idListCat3.length; i++)
         {
             let currentId = idListCat3[i];
-            let positionNumber = i;
+            let positionNumber = i + 21;
             fetchMovieDetailsForCategories(currentId, positionNumber);
         }
        

@@ -47,18 +47,18 @@ async function SearchSevenBestRatedMovieCat1() {
     const response2 = await fetch(url2);
     const movies = await response.json();
     const movies2 = await response2.json();
-    let idList = [];
+    let idListCat1 = [];
 
     for (let i = 0; i < movies.results.length; i++) {
-        idList.push(movies.results[i].id);
+        idListCat1.push(movies.results[i].id);
     }
     for (let i = 0; i < 2; i++) {
-        idList.push(movies2.results[i].id);
+        idListCat1.push(movies2.results[i].id);
     }
 
-    console.log(idList);
+    console.log(idListCat1);
 
-    return idList;
+    return idListCat1;
 }
 
 // 7 best movies category MUSIC
@@ -69,19 +69,19 @@ async function SearchSevenBestRatedMovieCat2() {
     const response2 = await fetch(url2);
     const movies = await response.json();
     const movies2 = await response2.json();
-    let idList = [];
+    let idListCat2 = [];
 
     
     for (let i = 0; i < movies.results.length; i++) {
-        idList.push(movies.results[i].id);
+        idListCat2.push(movies.results[i].id);
     }
     for (let i = 0; i < 2; i++) {
-        idList.push(movies2.results[i].id);
+        idListCat2.push(movies2.results[i].id);
     }
 
-    console.log(idList);
+    console.log(idListCat2);
 
-    return idList;
+    return idListCat2;
 }
 
 // 7 best movies category THRILLER
@@ -92,19 +92,19 @@ async function SearchSevenBestRatedMovieCat3() {
     const response2 = await fetch(url2);
     const movies = await response.json();
     const movies2 = await response2.json();
-    let idList = [];
+    let idListCat3 = [];
 
     
     for (let i = 0; i < movies.results.length; i++) {
-        idList.push(movies.results[i].id);
+        idListCat3.push(movies.results[i].id);
     }
     for (let i = 0; i < 2; i++) {
-        idList.push(movies2.results[i].id);
+        idListCat3.push(movies2.results[i].id);
     }
 
-    console.log(idList);
+    console.log(idListCat3);
 
-    return idList;
+    return idListCat3;
 }
 
 SearchSevenBestRatedMovie();
@@ -218,6 +218,7 @@ async function fetchMovieDetailsForCategories(currentId, positionNumber) {
     console.log(currentId);
 
 
+
     let url = "http://localhost:8000/api/v1/titles/" + currentId;
     console.log(url);
     let response = await fetch(url);
@@ -289,23 +290,63 @@ async function searchAndProcessSingleMovie() {
     }
 }
 
+
+
+
 async function searchAndProcessMovies() {
+
+    // 7 meilleurs films
     try {
-        // meilleur film
-        
-        
-        // 7 meilleurs films
-
-        // 7 meilleurs films cat1
-
-        // 7 meilleurs films cat2
-        
-       
         const idList = await SearchSevenBestRatedMovie();
         console.log(idList);
-        for (let i = 1; i < idList.length; i++)
+        for (let i = 0; i < idList.length; i++)
         {
             let currentId = idList[i];
+            let positionNumber = i;
+            fetchMovieDetailsForCategories(currentId, positionNumber);
+        }
+       
+    } catch (error) {
+        console.error(error);
+    }
+
+    // 7 meilleurs Cat1
+    try {
+        const idListCat1 = await SearchSevenBestRatedMovieCat1();
+        console.log(idListCat1);
+        for (let i = 0; i < idListCat1.length; i++)
+        {
+            let currentId = idListCat1[i];
+            let positionNumber = i;
+            fetchMovieDetailsForCategories(currentId, positionNumber);
+        }
+       
+    } catch (error) {
+        console.error(error);
+    }
+
+     // 7 meilleurs Cat2
+     try {
+        const idListCat2 = await SearchSevenBestRatedMovieCat2();
+        console.log(idListCat2);
+        for (let i = 0; i < idListCat2.length; i++)
+        {
+            let currentId = idListCat2[i];
+            let positionNumber = i;
+            fetchMovieDetailsForCategories(currentId, positionNumber);
+        }
+       
+    } catch (error) {
+        console.error(error);
+    }
+
+      // 7 meilleurs Cat3
+      try {
+        const idListCat3 = await SearchSevenBestRatedMovieCat3();
+        console.log(idListCat3);
+        for (let i = 0; i < idListCat3.length; i++)
+        {
+            let currentId = idListCat3[i];
             let positionNumber = i;
             fetchMovieDetailsForCategories(currentId, positionNumber);
         }

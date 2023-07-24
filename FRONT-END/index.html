@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="style-small-divs/output.css">
     <link rel="stylesheet" href="style-main/output.css">
     <link rel="stylesheet" href="style-carousel/output.css">
+    <link rel="stylesheet" href="style-dynamic-div/output.css">
     <script src="script.js" defer></script>
     <script src="scriptModal.js" defer></script>
     <title>Document</title>
@@ -20,12 +21,10 @@
     <main class="main-div">
       
       <!-- MODAL WINDOW HTML -->
-      <div id="movies-container"></div>
+      <!-- <div id="movies-container"></div> -->
       
       <div class="main-blur-screen" id="main-blur-screen" >
-
-   
-        
+     
         <section class="modal-window">
           <button class="close-button" id="close-button" onclick="closeModal()">
             CLOSE 
@@ -86,8 +85,85 @@
       
         </div>
 
-        <!-- BEST 7 MOVIES -->
+        <div class="dynamic-div">
 
+          <section class="carousel" aria-label="Gallery" id="dynamic-div">
+          
+            <ol id="carousel__viewport_cat1" class="carousel__viewport">
+
+            </ol>
+
+            <div class="button-box-cat">
+              <button class="button button-more-info" onclick="openModal()">More Info</button>
+              <button class="button button-play">Play</button>
+            </div>
+
+          </section>
+
+
+          <section class="carousel" aria-label="Gallery" id="dynamic-div">
+          
+            <ol id="carousel__viewport_cat2" class="carousel__viewport">
+
+            </ol>
+
+            <div class="button-box-cat">
+              <button class="button button-more-info" onclick="openModal()">More Info</button>
+              <button class="button button-play">Play</button>
+            </div>
+
+          </section>
+
+
+          <section class="carousel" aria-label="Gallery" id="dynamic-div">
+          
+            <ol id="carousel__viewport_cat3" class="carousel__viewport">
+
+            </ol>
+
+            <div class="button-box-cat">
+              <button class="button button-more-info" onclick="openModal()">More Info</button>
+              <button class="button button-play">Play</button>
+            </div>
+
+          </section>
+ 
+
+          <section class="carousel" aria-label="Gallery" id="dynamic-div">
+          
+            <ol id="carousel__viewport_cat4" class="carousel__viewport">
+
+            </ol>
+
+            <div class="button-box-cat">
+              <button class="button button-more-info" onclick="openModal()">More Info</button>
+              <button class="button button-play">Play</button>
+            </div>
+
+          </section>
+
+        </div>
+
+          
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <!-- BEST 7 MOVIES -->
+<!-- 
         <section class="carousel" aria-label="Gallery">
           
           <ol class="carousel__viewport">
@@ -297,11 +373,11 @@
             <button class="button button-more-info" onclick="openModal()">More Info</button>
             <button class="button button-play">Play</button>
           </div>
-        </section>
+        </section>  -->
 
 
         <!-- CATEGORY BIOGRAPHY  -->
-        <section class="carousel" aria-label="Gallery">
+        <!-- <section class="carousel" aria-label="Gallery">
           
           <ol class="carousel__viewport">
             
@@ -495,11 +571,11 @@
             <button class="button button-more-info" onclick="openModal()">More Info</button>
             <button class="button button-play">Play</button>
           </div>
-        </section>
+        </section> -->
 
 
         <!-- CATEGORY MUSIC  -->
-        <section class="carousel" aria-label="Gallery">
+        <!-- <section class="carousel" aria-label="Gallery">
           
           <ol class="carousel__viewport">
 
@@ -693,11 +769,11 @@
             <button class="button button-more-info" onclick="openModal()">More Info</button>
             <button class="button button-play">Play</button>
           </div>
-        </section>
+        </section> -->
 
 
         <!-- CATEGORY THRILLER  -->
-        <section class="carousel" aria-label="Gallery">
+        <!-- <section class="carousel" aria-label="Gallery">
           
           <ol class="carousel__viewport">
            
@@ -891,9 +967,9 @@
             <button class="button button-more-info" onclick="openModal()">More Info</button>
             <button class="button button-play">Play</button>
           </div>
-        </section>
+        </section>  -->
 
     </main>
 
 </body>
-</html>
+</html> 

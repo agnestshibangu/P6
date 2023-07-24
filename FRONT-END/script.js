@@ -38,7 +38,6 @@ async function SearchSevenBestRatedMovie() {
     return idList;
 }
 
-
 // 7 best movies category BIOGRAPHY 
 async function SearchSevenBestRatedMovieCat1() {
     const url = "http://localhost:8000/api/v1/titles/?genre=biography&sort_by=-imdb_score";
@@ -249,16 +248,14 @@ async function fetchMovieDetailsForCategories(currentId, positionNumber) {
     //     document.getElementById("imgimg-" + [positionNumber]).src = ImageUrl;
     // }
 
-
-
-    console.log(imageUrl)
+    console.log(imageUrl);
+    console.log(currentId);
     // // // Update the HTML elements with movie details
     document.getElementById("imgimg-"+ [positionNumber]).src = imageUrl;
     document.getElementById("title-movie-" + [positionNumber]).innerText = title;
-    
+    document.getElementById("idSpan-" + [positionNumber]).innerText = currentId;
 
     // document.getElementById("bestRatedMovies-description").innerText = description;
-
 }
 
 
@@ -281,7 +278,249 @@ function addModalToDOM() {
     
     moviesContainer.appendChild(movieDiv);
 }
-addModalToDOM();
+
+
+
+
+
+function adddivToCaroussel() {
+
+    const moviesContainerCat1 = document.getElementById("carousel__viewport_cat1");
+
+    for (i = 0; i <= 6; i++) {    
+
+        const cat1 = document.createElement("li");
+        cat1.setAttribute("id", "carousel__slide" + i + "__cat1");
+        cat1.setAttribute("tabindex", "0");
+        cat1.setAttribute("tabindex", "0");
+        cat1.classList.add('carousel__slide');
+
+        const imgMovie = document.createElement("img");
+        imgMovie.setAttribute("id", "imgimg-" + i);
+        imgMovie.setAttribute("tabindex", "0");
+        imgMovie.classList.add('carousel__slide');
+
+        const divBoxInfos = document.createElement("div");
+        divBoxInfos.setAttribute("class", "box-infos box-infos-cat");
+
+        const divBoxBlack = document.createElement("div");
+        divBoxBlack.setAttribute("class", "box-black-opacity-50");
+    
+        const boxDesc = document.createElement("div");
+        boxDesc.setAttribute("class", "box-desc");
+
+        const idSpan = document.createElement("h2");
+        idSpan.setAttribute("id", "idSpan-" + i);
+
+
+        const title = document.createElement("h1");
+        title.setAttribute("class", "title-movie");
+        title.setAttribute("id", "title-movie-" + i);
+        title.setAttribute("onclick", "openModal()")
+
+        
+        
+        const carousselSnapper = document.createElement("div");
+        carousselSnapper.setAttribute("class", "carousel__snapper");
+        const carousselLinkPrev = document.createElement("a");
+        carousselLinkPrev.setAttribute("href", "#carousel__slide" + parseInt(i - 1) + "__cat1");
+        carousselLinkPrev.setAttribute("class", "carousel__prev");
+        const carousselLinkNext = document.createElement("a");
+        carousselLinkNext.setAttribute("href", "#carousel__slide" + parseInt(i + 1) + "__cat1");
+        carousselLinkNext.setAttribute("class", "carousel__next");
+
+        // caroussel slide first and last logic
+        //////
+
+        carousselSnapper.appendChild(carousselLinkPrev);
+        carousselSnapper.appendChild(carousselLinkNext);
+
+        // creating the box infos element
+        
+        boxDesc.appendChild(title);
+        boxDesc.appendChild(idSpan);
+        divBoxBlack.appendChild(boxDesc);
+        divBoxInfos.appendChild(divBoxBlack);
+
+        cat1.appendChild(imgMovie);
+        cat1.appendChild(divBoxInfos);
+        cat1.appendChild(carousselSnapper);
+        
+        moviesContainerCat1.appendChild(cat1);
+    }
+
+    const moviesContainerCat2 = document.getElementById("carousel__viewport_cat2");
+
+    for (i = 7; i <= 13; i++) {    
+
+        const cat2 = document.createElement("li");
+        cat2.setAttribute("id", "carousel__slide" + i + "__cat2");
+        cat2.setAttribute("tabindex", "0");
+        cat2.setAttribute("tabindex", "0");
+        cat2.classList.add('carousel__slide');
+
+        const imgMovie = document.createElement("img");
+        imgMovie.setAttribute("id", "imgimg-" + i);
+        imgMovie.setAttribute("tabindex", "0");
+        imgMovie.classList.add('carousel__slide');
+
+        const divBoxInfos = document.createElement("div");
+        divBoxInfos.setAttribute("class", "box-infos box-infos-cat");
+
+        const divBoxBlack = document.createElement("div");
+        divBoxBlack.setAttribute("class", "box-black-opacity-50");
+    
+        const boxDesc = document.createElement("div");
+        boxDesc.setAttribute("class", "box-desc");
+
+        const title = document.createElement("h1");
+        title.setAttribute("class", "title-movie");
+        title.setAttribute("id", "title-movie-" + i);
+        
+        const carousselSnapper = document.createElement("div");
+        carousselSnapper.setAttribute("class", "carousel__snapper");
+        const carousselLinkPrev = document.createElement("a");
+        carousselLinkPrev.setAttribute("href", "#carousel__slide" + parseInt(i - 1) + "__cat2");
+        carousselLinkPrev.setAttribute("class", "carousel__prev");
+        const carousselLinkNext = document.createElement("a");
+        carousselLinkNext.setAttribute("href", "#carousel__slide" + parseInt(i + 1) + "__cat2");
+        carousselLinkNext.setAttribute("class", "carousel__next");
+
+        // caroussel slide first and last logic
+        //////
+
+        carousselSnapper.appendChild(carousselLinkPrev);
+        carousselSnapper.appendChild(carousselLinkNext);
+
+        // creating the box infos element
+        
+        boxDesc.appendChild(title);
+        divBoxBlack.appendChild(boxDesc);
+        divBoxInfos.appendChild(divBoxBlack);
+
+        cat2.appendChild(imgMovie);
+        cat2.appendChild(divBoxInfos);
+        cat2.appendChild(carousselSnapper);
+        
+        moviesContainerCat2.appendChild(cat2);
+    }
+
+    const moviesContainerCat3 = document.getElementById("carousel__viewport_cat3");
+
+    for (i = 14; i <=20; i++) {    
+
+        const cat3 = document.createElement("li");
+        cat3.setAttribute("id", "carousel__slide" + i + "__cat3");
+        cat3.setAttribute("tabindex", "0");
+        cat3.setAttribute("tabindex", "0");
+        cat3.classList.add('carousel__slide');
+
+        const imgMovie = document.createElement("img");
+        imgMovie.setAttribute("id", "imgimg-" + i);
+        imgMovie.setAttribute("tabindex", "0");
+        imgMovie.classList.add('carousel__slide');
+
+        const divBoxInfos = document.createElement("div");
+        divBoxInfos.setAttribute("class", "box-infos box-infos-cat");
+
+        const divBoxBlack = document.createElement("div");
+        divBoxBlack.setAttribute("class", "box-black-opacity-50");
+    
+        const boxDesc = document.createElement("div");
+        boxDesc.setAttribute("class", "box-desc");
+
+        const title = document.createElement("h1");
+        title.setAttribute("class", "title-movie");
+        title.setAttribute("id", "title-movie-" + i);
+        
+        const carousselSnapper = document.createElement("div");
+        carousselSnapper.setAttribute("class", "carousel__snapper");
+        const carousselLinkPrev = document.createElement("a");
+        carousselLinkPrev.setAttribute("href", "#carousel__slide" + parseInt(i - 1) + "__cat3");
+        carousselLinkPrev.setAttribute("class", "carousel__prev");
+        const carousselLinkNext = document.createElement("a");
+        carousselLinkNext.setAttribute("href", "#carousel__slide" + parseInt(i + 1) + "__cat3");
+        carousselLinkNext.setAttribute("class", "carousel__next");
+
+        // caroussel slide first and last logic
+        //////
+
+        carousselSnapper.appendChild(carousselLinkPrev);
+        carousselSnapper.appendChild(carousselLinkNext);
+
+        // creating the box infos element
+        
+        boxDesc.appendChild(title);
+        divBoxBlack.appendChild(boxDesc);
+        divBoxInfos.appendChild(divBoxBlack);
+
+        cat3.appendChild(imgMovie);
+        cat3.appendChild(divBoxInfos);
+        cat3.appendChild(carousselSnapper);
+        
+        moviesContainerCat3.appendChild(cat3);
+    }
+
+    const moviesContainerCat4 = document.getElementById("carousel__viewport_cat4");
+
+    for (i = 21; i <=27; i++) {    
+
+        const cat4 = document.createElement("li");
+        cat4.setAttribute("id", "carousel__slide" + i + "__cat4");
+        cat4.setAttribute("tabindex", "0");
+        cat4.setAttribute("tabindex", "0");
+        cat4.classList.add('carousel__slide');
+
+        const imgMovie = document.createElement("img");
+        imgMovie.setAttribute("id", "imgimg-" + i);
+        imgMovie.setAttribute("tabindex", "0");
+        imgMovie.classList.add('carousel__slide');
+
+        const divBoxInfos = document.createElement("div");
+        divBoxInfos.setAttribute("class", "box-infos box-infos-cat");
+
+        const divBoxBlack = document.createElement("div");
+        divBoxBlack.setAttribute("class", "box-black-opacity-50");
+    
+        const boxDesc = document.createElement("div");
+        boxDesc.setAttribute("class", "box-desc");
+
+        const title = document.createElement("h1");
+        title.setAttribute("class", "title-movie");
+        title.setAttribute("id", "title-movie-" + i);
+        
+        const carousselSnapper = document.createElement("div");
+        carousselSnapper.setAttribute("class", "carousel__snapper");
+        const carousselLinkPrev = document.createElement("a");
+        carousselLinkPrev.setAttribute("href", "#carousel__slide" + parseInt(i - 1) + "__cat4");
+        carousselLinkPrev.setAttribute("class", "carousel__prev");
+        const carousselLinkNext = document.createElement("a");
+        carousselLinkNext.setAttribute("href", "#carousel__slide" + parseInt(i + 1) + "__cat4");
+        carousselLinkNext.setAttribute("class", "carousel__next");
+
+        // caroussel slide first and last logic
+        //////
+
+        carousselSnapper.appendChild(carousselLinkPrev);
+        carousselSnapper.appendChild(carousselLinkNext);
+
+        // creating the box infos element
+        
+        boxDesc.appendChild(title);
+        divBoxBlack.appendChild(boxDesc);
+        divBoxInfos.appendChild(divBoxBlack);
+
+        cat4.appendChild(imgMovie);
+        cat4.appendChild(divBoxInfos);
+        cat4.appendChild(carousselSnapper);
+        
+        moviesContainerCat4.appendChild(cat4);
+    }
+
+}
+
+adddivToCaroussel();
+
 
 
 

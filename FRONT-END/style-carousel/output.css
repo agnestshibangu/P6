@@ -76,20 +76,19 @@ ol, li {
 
 .carousel {
   position: relative;
-  padding-top: 75%;
   filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.2));
   perspective: 100px;
   margin-top: 100px;
 }
 
 .carousel__viewport {
-  position: absolute;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
-  height: 800px;
+  height: fit-content;
   display: flex;
+  overflow-y: hidden;
   overflow-x: scroll;
   counter-reset: item;
   scroll-behavior: smooth;
@@ -100,8 +99,9 @@ ol, li {
   position: relative;
   flex: 0 0 100%;
   width: 100%;
+  object-fit: cover;
   counter-increment: item;
-  height: 400px;
+  height: 600px;
 }
 
 .carousel__slide:before {
@@ -174,14 +174,14 @@ ol, li {
 .carousel__prev,
 .carousel__next {
   position: absolute;
-  top: 0;
-  margin-top: 37.5%;
+  top: 50%;
   width: 4rem;
   height: 4rem;
   transform: translateY(-50%);
   border-radius: 50%;
   font-size: 0;
   outline: 0;
+  background-color: rgb(75, 74, 74);
 }
 
 .carousel::before,
@@ -197,6 +197,7 @@ ol, li {
 .carousel::before,
 .carousel::after {
   content: "";
+  margin-top: -50px;
   z-index: 1;
   background-color: rgba(26, 25, 25, 0.3098039216);
   background-size: 1rem 1rem;

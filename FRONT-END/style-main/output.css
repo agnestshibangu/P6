@@ -2,6 +2,12 @@ html, body {
   max-width: 100%;
 }
 
+#movies-container {
+  height: 200px;
+  width: 100%;
+  background-color: rgb(89, 89, 89);
+}
+
 .main-div {
   max-width: 100%;
 }
@@ -13,12 +19,13 @@ html, body {
 
 .main-div {
   width: 100%;
-  height: 1000vh;
-  background-color: rgb(61, 61, 61);
+  height: fit-content;
+  background-color: rgb(105, 103, 103);
   position: relative;
 }
 
 .main-blur-screen {
+  display: none;
   width: 100%;
   height: 1000vh;
   position: absolute;
@@ -27,13 +34,38 @@ html, body {
 }
 
 .modal-window {
-  width: 70%;
-  height: 600px;
+  width: 60%;
+  height: 500px;
   background-color: rgba(148, 148, 151, 0.926);
   position: fixed;
   margin: 5% auto; /* Only centers horizontally not vertically! */
   left: 0;
   right: 0;
+}
+
+.close-button {
+  width: fit-content;
+  height: fit-content;
+  padding: 10px 10px;
+  background-color: rgba(68, 67, 67, 0.327);
+  position: absolute;
+  right: 0;
+}
+
+.modal-inner-img {
+  height: 200px;
+  width: 100%;
+  background-color: white;
+}
+.modal-inner-img:hover {
+  height: 300px;
+}
+
+.modal-inner-title {
+  position: absolute;
+  z-index: 10;
+  top: 30%;
+  left: 5%;
 }
 
 /*# sourceMappingURL=output.css.map */

@@ -168,25 +168,22 @@ async function fetchMovieDetails() {
     const movies = await response.json();
 
     const movie = movies.results[0]
-    //console.log(movie.description);
-    // console.log(movie.title);
-    // console.log(movie.image_url);
-    // console.log(movie.genres);
-    // console.log(movie.date_published);
-    // console.log(movie.rated);
-    // console.log(movie.imdb_score);
-    // console.log(movie.directors);
-    // console.log(movie.actors);
-    // console.log(movie.duration);
-    // console.log(movie.countries);
-    // console.log(movie.description);
+    console.log(movie.title);
+    console.log(movie.image_url);
+    console.log(movie.genres[0]);
+    console.log(movie.year);
+    console.log(movie.votes);
+    console.log(movie.directors);
+    console.log(movie.actors);
+    console.log(movie.duration);
+    console.log(movie.countries);
 
 
     // Retrieve the desired movie details
     const title = movie.title;
     const ImageUrl = movie.image_url;
-    const genres = movie.genres;
-    const date_published = movie.date_published;
+    const genres = movie.genres[0];
+    const year = movie.year;
     const rated = movie.rated;
     const imdb_score = movie.imdb_score;
     const directors = movie.directors;
@@ -199,6 +196,8 @@ async function fetchMovieDetails() {
     // // Update the HTML elements with movie details
     document.getElementById("title-movie-big-div").innerText = title;
     document.getElementById("big-div-img-0").src = ImageUrl;
+    document.getElementById("modal-genre-big-div").innerText = genres;
+    document.getElementById("modal-year-big-div").innerText = year;
     // document.getElementById("description-movie-big-div").innerText = description;
 
 }
@@ -262,6 +261,27 @@ async function fetchMovieDetailsForCategories(currentId, positionNumber) {
 
 }
 
+
+function addModalToDOM() {
+
+    const moviesContainer = document.getElementById("movies-container");
+
+
+    const movieDiv = document.createElement("div");
+    const movieImage = document.createElement("img");
+    const movieTitle = document.createElement("h2");
+    const movieButton = document.createElement("button");
+
+    
+    movieTitle.textContent = "add modal title";
+    movieButton.textContent = "Voir les détails";
+
+    movieDiv.appendChild(movieTitle);
+    movieDiv.appendChild(movieButton);
+    
+    moviesContainer.appendChild(movieDiv);
+}
+addModalToDOM();
 
 
 

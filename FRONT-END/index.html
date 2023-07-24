@@ -5,13 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <!-- <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css"> -->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="style-navbar/output.css">
     <link rel="stylesheet" href="style-big-div/output.css">
     <link rel="stylesheet" href="style-small-divs/output.css">
     <link rel="stylesheet" href="style-main/output.css">
     <link rel="stylesheet" href="style-carousel/output.css">
     <script src="script.js" defer></script>
+    <script src="scriptModal.js" defer></script>
     <title>Document</title>
 </head>
 <body>
@@ -19,18 +20,42 @@
     <main class="main-div">
       
       <!-- MODAL WINDOW HTML -->
-      <div class="main-blur-screen">
+      <div id="movies-container"></div>
+      
+      <div class="main-blur-screen" id="main-blur-screen" >
+
+   
         
         <section class="modal-window">
+          <button class="close-button" id="close-button" onclick="closeModal()">
+            CLOSE 
+          </button>
+          <div class="modal-inner">
+            <div class="modal-inner-top">
+              <div class="modal-inner-img"></div>
+              <h1 class="modal-inner-title" id="title-movie-big-div">movie title</h1>
+            </div>
+            <div class="modal-inner-bottom">
+              <p class="modal-inner-genre" id="modal-genre-big-div">genre</p>
+              <p class="modal-inner-year" id="modal-year-big-div"></p>
+              <p class="modal-inner-rated" id="modal-rated-big-div">rated</p>
+              <p class="modal-inner-score-lmdb" id="modal-score-lmdb-big-div">score-lmdb</p>
+              <p class="modal-inner-director" id="modal-director-big-div">director</p>
+              <p class="modal-inner-actor-list" id="modal-actor-list-big-div">actor-list</p>
+              <p class="modal-inner-duration" id="modal-duration-big-div">duration</p>
+              <p class="modal-inner-country-origin" id="modal-country-origin-big-div">country-origin</p>
+              <p class="modal-inner-box-office-result" id="modal-box-office-result-big-div">office-result</p>
+              <p class="modal-inner-actor-summary" id="modal-actor-summary-big-div">actor-summary</p>
+            </div>
+            
+          </div>
         </section>
-
-      </div>
+      </div> 
 
         <header class="header">
               <div class="inner-navbar">
                 <ul class="navbar-ul"> 
                   <h1 class="just-stream-it-title">JustStreamIt</h1>   
-                  <i class="fa-solid fa-bars" ></i>
                   <li>Accueil</li>
                   <li>Catégorie</li> 
                 </ul> 
@@ -49,14 +74,12 @@
                     <h2 class="description-movie-big-div" id="description-movie-big-div"></h2>
 
                   </div>
-                  <button class="button button-more-info">More Info</button>
+                  <button class="button button-more-info" onclick="openModal()">More Info</button>
                   <button class="button button-play">Play</button>
                 </div> 
        
               </div>
-           
-            
-            
+
             </div>
             <img id="big-div-img-0">
           </div>
@@ -77,22 +100,20 @@
                 tabindex="0"
                 class="carousel__slide">  
 
-                <div class="box-infos box-infos-cat">
-                  <div class="box-black-opacity-50">
-                    <div class="box-desc">
-                      <p id="bestRatedMovies-description"></p>
-                     
-                    </div>
-              
-                  </div> 
-         
+                
+              <div class="box-infos box-infos-cat">
+                <div class="box-black-opacity-50">
+                  <div class="box-desc">
+                    <h1 class="title-movie" id="title-movie-0"></h1> 
+                  </div>
                 </div>
+              </div>
 
-                <h1 class="title-movie" id="title-movie-0"></h1> 
 
               <div class="carousel__snapper">
                 <a href="#carousel__slide7__cat1"
-                   class="carousel__prev">Go to last slide</a>
+                   class="carousel__prev">
+                </a>
                 <a href="#carousel__slide2__cat1"
                    class="carousel__next">Go to next slide</a>
               </div>
@@ -108,8 +129,15 @@
               <img id="imgimg-1"
               tabindex="0"
               class="carousel__slide" src="">  
+              
 
-    
+              <div class="box-infos box-infos-cat">
+                <div class="box-black-opacity-50">
+                  <div class="box-desc">
+                    <h1 class="title-movie" id="title-movie-1"></h1> 
+                  </div>
+                </div>
+              </div>
 
               <h1 class="title-movie" id="title-movie-1"></h1> 
 
@@ -131,18 +159,15 @@
               tabindex="0"
               class="carousel__slide" src="">  
 
+              
               <div class="box-infos box-infos-cat">
                 <div class="box-black-opacity-50">
                   <div class="box-desc">
-                    <h2 id="bestRatedMovies-title"></h2> 
-                    <p id="bestRatedMovies-description"></p>
-                  
+                    <h1 class="title-movie" id="title-movie-2"></h1> 
                   </div>
-                </div> 
-      
+                </div>
               </div>
 
-              <h1 class="title-movie" id="title-movie-2"></h1> 
 
               <div class="carousel__snapper">
                 <a href="#carousel__slide2__cat1"
@@ -162,16 +187,13 @@
               tabindex="0"
               class="carousel__slide" src="">  
 
+              
               <div class="box-infos box-infos-cat">
                 <div class="box-black-opacity-50">
                   <div class="box-desc">
-                    <h2 id="bestRatedMovies-title"></h2> 
-                    <p id="bestRatedMovies-description"></p>
-                  
+                    <h1 class="title-movie" id="title-movie-3"></h1> 
                   </div>
-
-                </div> 
-      
+                </div>
               </div>
 
               <h1 class="title-movie" id="title-movie-3"></h1> 
@@ -194,18 +216,14 @@
               tabindex="0"
               class="carousel__slide" src="">  
 
+              
               <div class="box-infos box-infos-cat">
                 <div class="box-black-opacity-50">
                   <div class="box-desc">
-                    <h2 id="bestRatedMovies-title"></h2> 
-                    <p id="bestRatedMovies-description"></p>
-                  
+                    <h1 class="title-movie" id="title-movie-4"></h1> 
                   </div>
-                </div> 
-      
-              </div>
-
-              <h1 class="title-movie" id="title-movie-4"></h1> 
+                </div>
+              </div> 
 
               <div class="carousel__snapper">
                 <a href="#carousel__slide4__cat1"
@@ -225,18 +243,15 @@
               tabindex="0"
               class="carousel__slide" src="">  
 
+              
               <div class="box-infos box-infos-cat">
                 <div class="box-black-opacity-50">
                   <div class="box-desc">
-                    <h2 id="bestRatedMovies-title"></h2> 
-                    <p id="bestRatedMovies-description"></p>
-                  
+                    <h1 class="title-movie" id="title-movie-5"></h1> 
                   </div>
-                </div> 
-      
+                </div>
               </div>
 
-              <h1 class="title-movie" id="title-movie-5"></h1> 
 
               <div class="carousel__snapper">
                 <a href="#carousel__slide5__cat1"
@@ -256,19 +271,14 @@
               tabindex="0"
               class="carousel__slide" src="">  
 
+              
               <div class="box-infos box-infos-cat">
                 <div class="box-black-opacity-50">
                   <div class="box-desc">
-                    <h2 id="bestRatedMovies-title"></h2> 
-                    <p id="bestRatedMovies-description"></p>
-                  
+                    <h1 class="title-movie" id="title-movie-6"></h1> 
                   </div>
-
-                </div> 
-      
+                </div>
               </div>
-
-              <h1 class="title-movie" id="title-movie-6"></h1> 
 
               <div class="carousel__snapper">
                 <a href="#carousel__slide6__cat1"
@@ -284,7 +294,7 @@
           
           
           <div class="button-box-cat">
-            <button class="button button-more-info">More Info</button>
+            <button class="button button-more-info" onclick="openModal()">More Info</button>
             <button class="button button-play">Play</button>
           </div>
         </section>
@@ -306,16 +316,10 @@
                 <div class="box-infos box-infos-cat">
                   <div class="box-black-opacity-50">
                     <div class="box-desc">
-                      <h2 id="bestRatedMovies-title"></h2> 
-                      <p id="bestRatedMovies-description"></p>
-                     
+                      <h1 class="title-movie" id="title-movie-7"></h1> 
                     </div>
-              
-                  </div> 
-         
+                  </div>
                 </div>
-
-                <h1 class="title-movie" id="title-movie-7"></h1> 
 
               <div class="carousel__snapper">
                 <a href="#carousel__slide7__cat2"
@@ -339,15 +343,10 @@
               <div class="box-infos box-infos-cat">
                 <div class="box-black-opacity-50">
                   <div class="box-desc">
-                    <h2 id="bestRatedMovies-title"></h2> 
-                    <p id="bestRatedMovies-description"></p>
-                  
+                    <h1 class="title-movie" id="title-movie-8"></h1> 
                   </div>
-                </div> 
-      
+                </div>
               </div>
-
-              <h1 class="title-movie" id="title-movie-8"></h1> 
 
               <div class="carousel__snapper">
                 <a href="#carousel__slide1__cat2"
@@ -370,15 +369,10 @@
               <div class="box-infos box-infos-cat">
                 <div class="box-black-opacity-50">
                   <div class="box-desc">
-                    <h2 id="bestRatedMovies-title"></h2> 
-                    <p id="bestRatedMovies-description"></p>
-                  
+                    <h1 class="title-movie" id="title-movie-9"></h1> 
                   </div>
-                </div> 
-      
+                </div>
               </div>
-
-              <h1 class="title-movie" id="title-movie-9"></h1> 
 
               <div class="carousel__snapper">
                 <a href="#carousel__slide2__cat2"
@@ -401,16 +395,10 @@
               <div class="box-infos box-infos-cat">
                 <div class="box-black-opacity-50">
                   <div class="box-desc">
-                    <h2 id="bestRatedMovies-title"></h2> 
-                    <p id="bestRatedMovies-description"></p>
-                  
+                    <h1 class="title-movie" id="title-movie-10"></h1> 
                   </div>
-
-                </div> 
-      
+                </div>
               </div>
-
-              <h1 class="title-movie" id="title-movie-10"></h1> 
 
               <div class="carousel__snapper">
                 <a href="#carousel__slide3__cat2"
@@ -433,15 +421,10 @@
             <div class="box-infos box-infos-cat">
               <div class="box-black-opacity-50">
                 <div class="box-desc">
-                  <h2 id="bestRatedMovies-title"></h2> 
-                  <p id="bestRatedMovies-description"></p>
-                
+                  <h1 class="title-movie" id="title-movie-11"></h1> 
                 </div>
-              </div> 
-    
+              </div>
             </div>
-
-            <h1 class="title-movie" id="title-movie-11"></h1> 
 
             <div class="carousel__snapper">
               <a href="#carousel__slide4__cat2"
@@ -464,15 +447,10 @@
               <div class="box-infos box-infos-cat">
                 <div class="box-black-opacity-50">
                   <div class="box-desc">
-                    <h2 id="bestRatedMovies-title"></h2> 
-                    <p id="bestRatedMovies-description"></p>
-                  
+                    <h1 class="title-movie" id="title-movie-12"></h1> 
                   </div>
-                </div> 
-      
+                </div>
               </div>
-
-              <h1 class="title-movie" id="title-movie-12"></h1> 
 
               <div class="carousel__snapper">
                 <a href="#carousel__slide5__cat2"
@@ -495,16 +473,10 @@
               <div class="box-infos box-infos-cat">
                 <div class="box-black-opacity-50">
                   <div class="box-desc">
-                    <h2 id="bestRatedMovies-title"></h2> 
-                    <p id="bestRatedMovies-description"></p>
-                  
+                    <h1 class="title-movie" id="title-movie-13"></h1> 
                   </div>
-
-                </div> 
-      
+                </div>
               </div>
-
-              <h1 class="title-movie" id="title-movie-13"></h1> 
 
               <div class="carousel__snapper">
                 <a href="#carousel__slide6__cat2"
@@ -520,7 +492,7 @@
 
           
           <div class="button-box-cat">
-            <button class="button button-more-info">More Info</button>
+            <button class="button button-more-info" onclick="openModal()">More Info</button>
             <button class="button button-play">Play</button>
           </div>
         </section>
@@ -542,16 +514,10 @@
                 <div class="box-infos box-infos-cat">
                   <div class="box-black-opacity-50">
                     <div class="box-desc">
-                      <h2 id="bestRatedMovies-title"></h2> 
-                      <p id="bestRatedMovies-description"></p>
-                     
+                      <h1 class="title-movie" id="title-movie-14"></h1> 
                     </div>
-              
-                  </div> 
-         
+                  </div>
                 </div>
-
-                <h1 class="title-movie" id="title-movie-14"></h1> 
 
               <div class="carousel__snapper">
                 <a href="#carousel__slide7__cat3"
@@ -575,15 +541,10 @@
               <div class="box-infos box-infos-cat">
                 <div class="box-black-opacity-50">
                   <div class="box-desc">
-                    <h2 id="bestRatedMovies-title"></h2> 
-                    <p id="bestRatedMovies-description"></p>
-                  
+                    <h1 class="title-movie" id="title-movie-15"></h1> 
                   </div>
-                </div> 
-      
+                </div>
               </div>
-
-              <h1 class="title-movie" id="title-movie-15"></h1> 
 
               <div class="carousel__snapper">
                 <a href="#carousel__slide1__cat3"
@@ -606,15 +567,10 @@
               <div class="box-infos box-infos-cat">
                 <div class="box-black-opacity-50">
                   <div class="box-desc">
-                    <h2 id="bestRatedMovies-title"></h2> 
-                    <p id="bestRatedMovies-description"></p>
-                  
+                    <h1 class="title-movie" id="title-movie-16"></h1> 
                   </div>
-                </div> 
-      
+                </div>
               </div>
-
-              <h1 class="title-movie" id="title-movie-16"></h1> 
 
               <div class="carousel__snapper">
                 <a href="#carousel__slide2__cat3"
@@ -637,16 +593,10 @@
               <div class="box-infos box-infos-cat">
                 <div class="box-black-opacity-50">
                   <div class="box-desc">
-                    <h2 id="bestRatedMovies-title"></h2> 
-                    <p id="bestRatedMovies-description"></p>
-                  
+                    <h1 class="title-movie" id="title-movie-17"></h1> 
                   </div>
-
-                </div> 
-      
+                </div>
               </div>
-
-              <h1 class="title-movie" id="title-movie-17"></h1> 
 
               <div class="carousel__snapper">
                 <a href="#carousel__slide3__cat3"
@@ -669,15 +619,10 @@
             <div class="box-infos box-infos-cat">
               <div class="box-black-opacity-50">
                 <div class="box-desc">
-                  <h2 id="bestRatedMovies-title"></h2> 
-                  <p id="bestRatedMovies-description"></p>
-                
+                  <h1 class="title-movie" id="title-movie-18"></h1> 
                 </div>
-              </div> 
-    
+              </div>
             </div>
-
-            <h1 class="title-movie" id="title-movie-18"></h1> 
 
             <div class="carousel__snapper">
               <a href="#carousel__slide4__cat3"
@@ -700,15 +645,10 @@
               <div class="box-infos box-infos-cat">
                 <div class="box-black-opacity-50">
                   <div class="box-desc">
-                    <h2 id="bestRatedMovies-title"></h2> 
-                    <p id="bestRatedMovies-description"></p>
-                  
+                    <h1 class="title-movie" id="title-movie-19"></h1> 
                   </div>
-                </div> 
-      
+                </div>
               </div>
-
-              <h1 class="title-movie" id="title-movie-19"></h1> 
 
               <div class="carousel__snapper">
                 <a href="#carousel__slide5__cat3"
@@ -731,16 +671,10 @@
               <div class="box-infos box-infos-cat">
                 <div class="box-black-opacity-50">
                   <div class="box-desc">
-                    <h2 id="bestRatedMovies-title"></h2> 
-                    <p id="bestRatedMovies-description"></p>
-                  
+                    <h1 class="title-movie" id="title-movie-20"></h1> 
                   </div>
-
-                </div> 
-      
+                </div>
               </div>
-
-              <h1 class="title-movie" id="title-movie-20"></h1> 
 
               <div class="carousel__snapper">
                 <a href="#carousel__slide6__cat3"
@@ -756,7 +690,7 @@
 
           
           <div class="button-box-cat">
-            <button class="button button-more-info">More Info</button>
+            <button class="button button-more-info" onclick="openModal()">More Info</button>
             <button class="button button-play">Play</button>
           </div>
         </section>
@@ -778,16 +712,10 @@
                 <div class="box-infos box-infos-cat">
                   <div class="box-black-opacity-50">
                     <div class="box-desc">
-                      <h2 id="bestRatedMovies-title"></h2> 
-                      <p id="bestRatedMovies-description"></p>
-                     
+                      <h1 class="title-movie" id="title-movie-21"></h1> 
                     </div>
-              
-                  </div> 
-         
+                  </div>
                 </div>
-
-                <h1 class="title-movie" id="title-movie-21"></h1> 
 
               <div class="carousel__snapper">
                 <a href="#carousel__slide7__cat4"
@@ -811,15 +739,10 @@
               <div class="box-infos box-infos-cat">
                 <div class="box-black-opacity-50">
                   <div class="box-desc">
-                    <h2 id="bestRatedMovies-title"></h2> 
-                    <p id="bestRatedMovies-description"></p>
-                  
+                    <h1 class="title-movie" id="title-movie-22"></h1> 
                   </div>
-                </div> 
-      
+                </div>
               </div>
-
-              <h1 class="title-movie" id="title-movie-22"></h1> 
 
               <div class="carousel__snapper">
                 <a href="#carousel__slide1__cat4"
@@ -842,15 +765,10 @@
               <div class="box-infos box-infos-cat">
                 <div class="box-black-opacity-50">
                   <div class="box-desc">
-                    <h2 id="bestRatedMovies-title"></h2> 
-                    <p id="bestRatedMovies-description"></p>
-                  
+                    <h1 class="title-movie" id="title-movie-23"></h1> 
                   </div>
-                </div> 
-      
+                </div>
               </div>
-
-              <h1 class="title-movie" id="title-movie-23"></h1> 
 
               <div class="carousel__snapper">
                 <a href="#carousel__slide2__cat4"
@@ -873,16 +791,10 @@
               <div class="box-infos box-infos-cat">
                 <div class="box-black-opacity-50">
                   <div class="box-desc">
-                    <h2 id="bestRatedMovies-title"></h2> 
-                    <p id="bestRatedMovies-description"></p>
-                  
+                    <h1 class="title-movie" id="title-movie-24"></h1> 
                   </div>
-
-                </div> 
-      
+                </div>
               </div>
-
-              <h1 class="title-movie" id="title-movie-24"></h1> 
 
               <div class="carousel__snapper">
                 <a href="#carousel__slide3__cat4"
@@ -905,15 +817,10 @@
             <div class="box-infos box-infos-cat">
               <div class="box-black-opacity-50">
                 <div class="box-desc">
-                  <h2 id="bestRatedMovies-title"></h2> 
-                  <p id="bestRatedMovies-description"></p>
-                
+                  <h1 class="title-movie" id="title-movie-25"></h1> 
                 </div>
-              </div> 
-    
+              </div>
             </div>
-
-            <h1 class="title-movie" id="title-movie-25"></h1> 
 
             <div class="carousel__snapper">
               <a href="#carousel__slide4__cat4"
@@ -936,15 +843,10 @@
               <div class="box-infos box-infos-cat">
                 <div class="box-black-opacity-50">
                   <div class="box-desc">
-                    <h2 id="bestRatedMovies-title"></h2> 
-                    <p id="bestRatedMovies-description"></p>
-                  
+                    <h1 class="title-movie" id="title-movie-26"></h1> 
                   </div>
-                </div> 
-      
+                </div>
               </div>
-
-              <h1 class="title-movie" id="title-movie-26"></h1> 
 
               <div class="carousel__snapper">
                 <a href="#carousel__slide5__cat4"
@@ -967,16 +869,10 @@
               <div class="box-infos box-infos-cat">
                 <div class="box-black-opacity-50">
                   <div class="box-desc">
-                    <h2 id="bestRatedMovies-title"></h2> 
-                    <p id="bestRatedMovies-description"></p>
-                  
+                    <h1 class="title-movie" id="title-movie-2"></h1> 
                   </div>
-
-                </div> 
-      
+                </div>
               </div>
-
-              <h1 class="title-movie" id="title-movie-27"></h1> 
 
               <div class="carousel__snapper">
                 <a href="#carousel__slide6__cat4"
@@ -992,19 +888,12 @@
 
           
           <div class="button-box-cat">
-            <button class="button button-more-info">More Info</button>
+            <button class="button button-more-info" onclick="openModal()">More Info</button>
             <button class="button button-play">Play</button>
           </div>
         </section>
 
-
-        
-
-
     </main>
-
-
-   
 
 </body>
 </html>

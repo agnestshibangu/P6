@@ -81,7 +81,7 @@
     position: relative;
     filter: drop-shadow(0 0 10px #0003);
     perspective: 100px;
-    margin-top: 200px;
+    margin-top: 50px;
   }
   
   .carousel__viewport {
@@ -207,7 +207,7 @@
   .carousel::before,
   .carousel::after {
     content: '';
-    margin-top: -50px;
+    margin-top: -25px;
     z-index: 1;
     background-color: #1a19194f;
     background-size: 1rem 1rem;

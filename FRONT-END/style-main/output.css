@@ -17,6 +17,15 @@ html, body {
   margin: 0;
 }
 
+.category-title {
+  color: white;
+  text-align: center;
+  margin-top: 100px;
+}
+.category-title:first-child {
+  margin-top: 180px;
+}
+
 .main-div {
   width: 100%;
   height: 600vh;
@@ -35,30 +44,36 @@ html, body {
 
 .modal-window {
   width: 60%;
-  height: 500px;
+  height: fit-content;
   background-color: rgba(148, 148, 151, 0.926);
   position: fixed;
-  margin: 5% auto; /* Only centers horizontally not vertically! */
+  margin: 5% auto;
   left: 0;
   right: 0;
+  border-radius: 10px;
 }
 
 .close-button {
   width: fit-content;
   height: fit-content;
   padding: 10px 10px;
-  background-color: rgba(68, 67, 67, 0.327);
+  background-color: rgb(253, 148, 148);
+  border: none;
+  border-radius: 10px;
   position: absolute;
   right: 0;
 }
 
-.modal-inner-img {
+.modal-inner {
+  font-size: 13px;
+}
+
+#modal-inner-img {
   height: 200px;
   width: 100%;
-  background-color: white;
-}
-.modal-inner-img:hover {
-  height: 300px;
+  object-fit: cover;
+  border-radius: 10px;
+  object-position: 50% 50%;
 }
 
 .modal-inner-title {
@@ -66,6 +81,16 @@ html, body {
   z-index: 10;
   top: 30%;
   left: 5%;
+  color: white;
+  font-size: 30px;
+}
+
+.modal-inner-bottom {
+  margin: 10px 7%;
+}
+
+.modal-text {
+  margin-top: 4px;
 }
 
 /*# sourceMappingURL=output.css.map */

@@ -33,7 +33,7 @@ async function SearchSevenBestRatedMovie() {
         idList.push(movies2.results[i].id);
     }
 
-    console.log(idList);
+    // console.log(idList);
 
     return idList;
 }
@@ -78,7 +78,7 @@ async function SearchSevenBestRatedMovieCat2() {
         idListCat2.push(movies2.results[i].id);
     }
 
-    console.log(idListCat2);
+    // console.log(idListCat2);
 
     return idListCat2;
 }
@@ -167,15 +167,15 @@ async function fetchMovieDetails() {
     const movies = await response.json();
 
     const movie = movies.results[0]
-    console.log(movie.title);
-    console.log(movie.image_url);
-    console.log(movie.genres[0]);
-    console.log(movie.year);
-    console.log(movie.votes);
-    console.log(movie.directors);
-    console.log(movie.actors);
-    console.log(movie.duration);
-    console.log(movie.countries);
+    // console.log(movie.title);
+    // console.log(movie.image_url);
+    // console.log(movie.genres[0]);
+    // console.log(movie.year);
+    // console.log(movie.votes);
+    // console.log(movie.directors);
+    // console.log(movie.actors);
+    // console.log(movie.duration);
+    // console.log(movie.countries);
 
 
     // Retrieve the desired movie details
@@ -199,63 +199,6 @@ async function fetchMovieDetails() {
     document.getElementById("modal-year-big-div").innerText = year;
     // document.getElementById("description-movie-big-div").innerText = description;
 
-}
-
-
-async function fetchMovieDetailsForCategories(currentId, positionNumber) {
-
-    console.log(positionNumber);
-    console.log(currentId);
-
-    let url = "http://localhost:8000/api/v1/titles/" + currentId;
-    console.log(url);
-    let response = await fetch(url);
-    let movie = await response.json();
-
-    console.log(movie);
-    console.log(movie.image_url);
-    
-    // console.log(movie.image_url);
-    // console.log(movie.genres);
-    // console.log(movie.date_published);
-    // console.log(movie.rated);
-    // console.log(movie.imdb_score);
-    // console.log(movie.directors);
-    // console.log(movie.actors);
-    // console.log(movie.duration);
-    // console.log(movie.countries);
-    // console.log(movie.description);
-
-
-    // // Retrieve the desired movie details
-    const title = movie.title;
-    const imageUrl = movie.image_url;
-    // const genres = movie.genres;
-    // const date_published = movie.date_published;
-    // const rated = movie.rated;
-    // const imdb_score = movie.imdb_score;
-    // const directors = movie.directors;
-    // const actors = movie.actors;
-    // const duration = movie.duration;
-    // const countries = movie.countries;
-    // const description = movie.description;
-
-    // // console.log(positionNumber);
-    
-    // // Single best movie
-    // if (positionNumber == 0) {
-    //     document.getElementById("title-other-movies-" + [positionNumber]).innerText = title;
-    //     document.getElementById("imgimg-" + [positionNumber]).src = ImageUrl;
-    // }
-
-    console.log(imageUrl);
-    console.log(currentId);
-    // // // Update the HTML elements with movie details
-    document.getElementById("imgimg-"+ [positionNumber]).src = imageUrl;
-    document.getElementById("title-movie-" + [positionNumber]).innerText = title;
-    document.getElementById("idSpan-" + [positionNumber]).innerText = currentId;
-
-    // document.getElementById("bestRatedMovies-description").innerText = description;
 }
 
 
@@ -311,15 +254,17 @@ function adddivToCaroussel() {
 
         const idSpan = document.createElement("h2");
         idSpan.setAttribute("id", "idSpan-" + i);
-
+        idSpan.setAttribute("class", "idSpan");
 
         const title = document.createElement("h1");
         title.setAttribute("class", "title-movie");
         title.setAttribute("id", "title-movie-" + i);
-        title.setAttribute("onclick", "openModal()")
 
-        
-        
+        const btnMoreInfo = document.createElement("button");
+        btnMoreInfo.textContent = 'More infos';
+        btnMoreInfo.setAttribute("id", "btn-more-infos-" + i);
+        btnMoreInfo.setAttribute("class", "btn-more-infos");
+
         const carousselSnapper = document.createElement("div");
         carousselSnapper.setAttribute("class", "carousel__snapper");
         const carousselLinkPrev = document.createElement("a");
@@ -336,8 +281,10 @@ function adddivToCaroussel() {
         carousselSnapper.appendChild(carousselLinkNext);
 
         // creating the box infos element
+       
         
         boxDesc.appendChild(title);
+        divBoxBlack.appendChild(btnMoreInfo);
         boxDesc.appendChild(idSpan);
         divBoxBlack.appendChild(boxDesc);
         divBoxInfos.appendChild(divBoxBlack);
@@ -373,9 +320,19 @@ function adddivToCaroussel() {
         const boxDesc = document.createElement("div");
         boxDesc.setAttribute("class", "box-desc");
 
+        const idSpan = document.createElement("h2");
+        idSpan.setAttribute("id", "idSpan-" + i);
+        idSpan.setAttribute("class", "idSpan");
+
         const title = document.createElement("h1");
         title.setAttribute("class", "title-movie");
         title.setAttribute("id", "title-movie-" + i);
+
+        const btnMoreInfo = document.createElement("button");
+        btnMoreInfo.textContent = 'More infos';
+        btnMoreInfo.setAttribute("id", "btn-more-infos-" + i);
+        btnMoreInfo.setAttribute("class", "btn-more-infos");
+
         
         const carousselSnapper = document.createElement("div");
         carousselSnapper.setAttribute("class", "carousel__snapper");
@@ -393,8 +350,11 @@ function adddivToCaroussel() {
         carousselSnapper.appendChild(carousselLinkNext);
 
         // creating the box infos element
-        
+
+       
         boxDesc.appendChild(title);
+        divBoxBlack.appendChild(btnMoreInfo);
+        boxDesc.appendChild(idSpan);
         divBoxBlack.appendChild(boxDesc);
         divBoxInfos.appendChild(divBoxBlack);
 
@@ -429,9 +389,18 @@ function adddivToCaroussel() {
         const boxDesc = document.createElement("div");
         boxDesc.setAttribute("class", "box-desc");
 
+        const idSpan = document.createElement("h2");
+        idSpan.setAttribute("id", "idSpan-" + i);
+        idSpan.setAttribute("class", "idSpan");
+
         const title = document.createElement("h1");
         title.setAttribute("class", "title-movie");
         title.setAttribute("id", "title-movie-" + i);
+
+        const btnMoreInfo = document.createElement("button");
+        btnMoreInfo.textContent = 'More infos';
+        btnMoreInfo.setAttribute("id", "btn-more-infos-" + i);
+        btnMoreInfo.setAttribute("class", "btn-more-infos");
         
         const carousselSnapper = document.createElement("div");
         carousselSnapper.setAttribute("class", "carousel__snapper");
@@ -449,8 +418,10 @@ function adddivToCaroussel() {
         carousselSnapper.appendChild(carousselLinkNext);
 
         // creating the box infos element
-        
+
+        divBoxBlack.appendChild(btnMoreInfo);
         boxDesc.appendChild(title);
+        boxDesc.appendChild(idSpan);
         divBoxBlack.appendChild(boxDesc);
         divBoxInfos.appendChild(divBoxBlack);
 
@@ -485,9 +456,19 @@ function adddivToCaroussel() {
         const boxDesc = document.createElement("div");
         boxDesc.setAttribute("class", "box-desc");
 
+        const idSpan = document.createElement("h2");
+        idSpan.setAttribute("id", "idSpan-" + i);
+        idSpan.setAttribute("class", "idSpan");
+
         const title = document.createElement("h1");
         title.setAttribute("class", "title-movie");
         title.setAttribute("id", "title-movie-" + i);
+
+        const btnMoreInfo = document.createElement("button");
+        btnMoreInfo.textContent = 'More infos';
+        btnMoreInfo.setAttribute("id", "btn-more-infos-" + i);
+        btnMoreInfo.setAttribute("class", "btn-more-infos");
+
         
         const carousselSnapper = document.createElement("div");
         carousselSnapper.setAttribute("class", "carousel__snapper");
@@ -507,6 +488,8 @@ function adddivToCaroussel() {
         // creating the box infos element
         
         boxDesc.appendChild(title);
+        divBoxBlack.appendChild(btnMoreInfo);
+        boxDesc.appendChild(idSpan);
         divBoxBlack.appendChild(boxDesc);
         divBoxInfos.appendChild(divBoxBlack);
 
@@ -520,6 +503,66 @@ function adddivToCaroussel() {
 }
 
 adddivToCaroussel();
+
+
+async function fetchMovieDetailsForCategories(currentId, positionNumber) {
+
+    // console.log(positionNumber);
+    // console.log(currentId);
+
+    let url = "http://localhost:8000/api/v1/titles/" + currentId;
+    // console.log(url);
+    let response = await fetch(url);
+    let movie = await response.json();
+
+    // console.log(movie);
+    // console.log(movie.image_url);
+    
+    // console.log(movie.image_url);
+    // console.log(movie.genres);
+    // console.log(movie.date_published);
+    // console.log(movie.rated);
+    // console.log(movie.imdb_score);
+    // console.log(movie.directors);
+    // console.log(movie.actors);
+    // console.log(movie.duration);
+    // console.log(movie.countries);
+    // console.log(movie.description);
+
+
+    // // Retrieve the desired movie details
+    const title = movie.title;
+    const imageUrl = movie.image_url;
+    // const genres = movie.genres;
+    // const date_published = movie.date_published;
+    // const rated = movie.rated;
+    // const imdb_score = movie.imdb_score;
+    // const directors = movie.directors;
+    // const actors = movie.actors;
+    // const duration = movie.duration;
+    // const countries = movie.countries;
+    // const description = movie.description;
+
+    // // console.log(positionNumber);
+    
+    // // Single best movie
+    // if (positionNumber == 0) {
+    //     document.getElementById("title-other-movies-" + [positionNumber]).innerText = title;
+    //     document.getElementById("imgimg-" + [positionNumber]).src = ImageUrl;
+    // }
+
+    // console.log(imageUrl);
+    // console.log(currentId);
+    // // // Update the HTML elements with movie details
+    document.getElementById("imgimg-"+ [positionNumber]).src = imageUrl;
+    document.getElementById("title-movie-" + [positionNumber]).innerText = title;
+    document.getElementById("idSpan-" + [positionNumber]).innerText = currentId;
+    console.log(currentId);
+    console.log(positionNumber);
+    // document.getElementById("title-movie-" + [positionNumber]).setAttribute("onclick", "openModal(" + currentId + ")");
+    document.getElementById("btn-more-infos-" + [positionNumber]).setAttribute("onclick", "openModal(" + currentId + ")");
+}
+
 
 
 
@@ -540,14 +583,12 @@ async function searchAndProcessSingleMovie() {
 }
 
 
-
-
 async function searchAndProcessMovies() {
 
     // 7 meilleurs films
     try {
         const idList = await SearchSevenBestRatedMovie();
-        console.log(idList);
+        // console.log(idList);
         for (let i = 0; i < idList.length; i++)
         {
             let currentId = idList[i];
@@ -562,7 +603,7 @@ async function searchAndProcessMovies() {
     // 7 meilleurs Cat1
     try {
         const idListCat1 = await SearchSevenBestRatedMovieCat1();
-        console.log(idListCat1);
+        // console.log(idListCat1);
         for (let i = 0; i < idListCat1.length; i++)
         {
             let currentId = idListCat1[i];
@@ -577,7 +618,7 @@ async function searchAndProcessMovies() {
      // 7 meilleurs Cat2
      try {
         const idListCat2 = await SearchSevenBestRatedMovieCat2();
-        console.log(idListCat2);
+        // console.log(idListCat2);
         for (let i = 0; i < idListCat2.length; i++)
         {
             let currentId = idListCat2[i];
@@ -592,7 +633,7 @@ async function searchAndProcessMovies() {
       // 7 meilleurs Cat3
       try {
         const idListCat3 = await SearchSevenBestRatedMovieCat3();
-        console.log(idListCat3);
+        // console.log(idListCat3);
         for (let i = 0; i < idListCat3.length; i++)
         {
             let currentId = idListCat3[i];
@@ -606,9 +647,9 @@ async function searchAndProcessMovies() {
 }
 
 // Call the searchAndProcessMovie function
-searchAndProcessSingleMovie() 
+searchAndProcessSingleMovie();
 
-searchAndProcessMovies()
+searchAndProcessMovies();
 
 
 

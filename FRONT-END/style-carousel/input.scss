@@ -227,4 +227,79 @@
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpolygon points='100,50 20,100 20,0' fill='%23fff'/%3E%3C/svg%3E");
   }
 
- 
+  @media only screen and (min-width: 600px) {
+    
+    .main-div {
+      background-color: black;
+    }
+
+    .carousel {
+      margin-top: 80px;
+      // top: 0;
+      // right: 0;
+      // bottom: 0;
+      // left: 0;
+      height: 317px;
+      width: 100%;
+       
+      overflow-y: unset;
+      overflow-x: auto;
+      scrollbar-color: white;
+    
+  
+    } 
+
+    .carousel__snapper {
+      display: none;
+    }
+
+
+    .carousel__viewport {
+      height: 300px;
+      width: 150%;
+      overflow-x: unset;
+      // overflow-y: hidden;
+   
+    }
+
+
+
+    .carousel__slide {
+      position: unset;
+      flex: 14%;
+      width: 80%;
+      object-fit: cover;
+      height: 500px;
+    }
+
+    .button-play {
+      display: none;
+    } 
+
+    .title-movie {
+      display: none;
+    }
+
+    .box-infos-cat {
+      display: none;
+    }
+
+      
+  .carousel__slide:before {
+    content: none;
+  }
+
+  .carousel__next,.carousel__prev {
+    transform: translateY(100%);
+    display: none;
+  }
+
+  .carousel::after, .carousel::before {
+    margin-top: 95px;
+    display: none;
+  }
+
+
+
+
+  }

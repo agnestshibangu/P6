@@ -44,7 +44,6 @@ async function openModal(currentId) {
     rated.innerText = movieRate;
     lmbd.innerText = movieLmbd;
 
-    console.log(movieImage);
     // director.innerText = movieDirector=
     // actor.innerText = movieActors;
     duration.innerText = movieDuration;

@@ -561,6 +561,7 @@ async function fetchMovieDetailsForCategories(currentId, positionNumber) {
     console.log(positionNumber);
     // document.getElementById("title-movie-" + [positionNumber]).setAttribute("onclick", "openModal(" + currentId + ")");
     document.getElementById("btn-more-infos-" + [positionNumber]).setAttribute("onclick", "openModal(" + currentId + ")");
+    document.getElementById("imgimg-" + [positionNumber]).setAttribute("onclick", "openModal(" + currentId + ")");
 }
 
 

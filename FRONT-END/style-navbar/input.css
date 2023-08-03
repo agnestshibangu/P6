@@ -1,7 +1,21 @@
-.navbar {
-  background-color: lightblue;
-  display: flex;
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@200&display=swap");
+.header {
+  height: 100px;
+  width: 100%;
+  background-color: black;
+  color: white;
   overflow: hidden;
+  font-family: "Montserrat", sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.inner-navbar {
+  width: 90%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding-left: 0;
 }
 
 .navbar-ul {

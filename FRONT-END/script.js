@@ -1,20 +1,3 @@
-// étape 1
-// retourne le film le mieux noté toutes catégories confondues
-
-// étape 2
-// 7 autres meilleurs films toutes catégories confondues
-
-// étape 3
-// 7 films les mieux notés d'une catégorie
-
-// étape 4
-// 7 films les mieux notés d'une catégorie
-
-// étape 5
-// 7 films les mieux notés d'une catégorie
-
-// étape 2
-
 // 7 best movies all categories 
 async function SearchSevenBestRatedMovie() {
     const url = "http://localhost:8000/api/v1/titles/?sort_by=-imdb_score";
@@ -32,8 +15,6 @@ async function SearchSevenBestRatedMovie() {
     for (let i = 0; i < 2; i++) {
         idList.push(movies2.results[i].id);
     }
-
-    // console.log(idList);
 
     return idList;
 }
@@ -78,8 +59,6 @@ async function SearchSevenBestRatedMovieCat2() {
         idListCat2.push(movies2.results[i].id);
     }
 
-    // console.log(idListCat2);
-
     return idListCat2;
 }
 
@@ -107,36 +86,11 @@ async function SearchSevenBestRatedMovieCat3() {
 }
 
 
-
-// étape 3
-// 7 films les mieux notés d'une catégorie
-
-// étape 4
-// 7 films les mieux notés d'une catégorie
-
-// étape 5
-// 7 films les mieux notés d'une catégorie
-
 async function fetchBestMovieDetails(id) {
 
     const url = "http://localhost:8000/api/v1/titles/" + id;
     const response = await fetch(url);
     const movie = await response.json();
-    //console.log(movie);
-    // console.log(movie.title);
-    // console.log(movie.image_url);
-    // console.log(movie.genres);
-    // console.log(movie.date_published);
-    // console.log(movie.rated);
-    // console.log(movie.imdb_score);
-    // console.log(movie.directors);
-    // console.log(movie.actors);
-    // console.log(movie.duration);
-    // console.log(movie.countries);
-    // console.log(movie.description);
-
-
-    // Retrieve the desired movie details
     const title = movie.title;
     const ImageUrl = movie.image_url;
     const genres = movie.genres;
@@ -149,13 +103,7 @@ async function fetchBestMovieDetails(id) {
     const countries = movie.countries;
     const description = movie.description;
 
-
-    // // Update the HTML elements with movie details
-
     document.getElementById("bestRatedMovies-img").src = ImageUrl;
-    // document.getElementById("bestRatedMovies-title").innerText = title;
-    // document.getElementById("bestRatedMovies-description").innerText = description;
-
 }
 
 
@@ -167,38 +115,26 @@ async function fetchMovieDetails() {
     const movies = await response.json();
 
     const movie = movies.results[0]
-    // console.log(movie.title);
-    // console.log(movie.image_url);
-    // console.log(movie.genres[0]);
-    // console.log(movie.year);
-    // console.log(movie.votes);
-    // console.log(movie.directors);
-    // console.log(movie.actors);
-    // console.log(movie.duration);
-    // console.log(movie.countries);
 
+    const urlResponse = await fetch(movie.url);
+    const movieDetails = await urlResponse.json();
 
-    // Retrieve the desired movie details
+    const description = movieDetails.description;
     const title = movie.title;
     const ImageUrl = movie.image_url;
     const genres = movie.genres[0];
     const year = movie.year;
     const rated = movie.rated;
-    const imdb_score = movie.imdb_score;
     const directors = movie.directors;
     const actors = movie.actors;
     const duration = movie.duration;
     const countries = movie.countries;
-    const description = movie.description;
-
-
-    // // Update the HTML elements with movie details
+    const id = movie.id;
+    
     document.getElementById("title-movie-big-div").innerText = title;
     document.getElementById("big-div-img-0").src = ImageUrl;
-    document.getElementById("modal-genre-big-div").innerText = genres;
-    document.getElementById("modal-year-big-div").innerText = year;
-    // document.getElementById("description-movie-big-div").innerText = description;
-
+    document.getElementById("description-movie-big-div2").innerText = description;
+    document.getElementById("big-div-button-more-info").setAttribute("onclick", "openModal(" + id + ")");
 }
 
 
@@ -223,20 +159,19 @@ function addModalToDOM() {
 }
 
 
-
-
-
 function adddivToCaroussel() {
+    const categories = [
+        { id: 1, from: 0, to: 6 },
+        { id: 2, from: 7, to: 13 },
+        { id: 3, from: 14, to: 20 },
+        { id: 4, from: 21, to: 27 }
+    ];
 
-    const moviesContainerCat1 = document.getElementById("carousel__viewport_cat1");
-
-    for (i = 0; i <= 6; i++) {    
-
-        const cat1 = document.createElement("li");
-        cat1.setAttribute("id", "carousel__slide" + i + "__cat1");
-        cat1.setAttribute("tabindex", "0");
-        cat1.setAttribute("tabindex", "0");
-        cat1.classList.add('carousel__slide');
+    function createCarouselElement(i, catId) {
+        const carouselElement = document.createElement("li");
+        carouselElement.setAttribute("id", "carousel__slide" + i + "__cat" + catId);
+        carouselElement.setAttribute("tabindex", "0");
+        carouselElement.classList.add('carousel__slide');
 
         const imgMovie = document.createElement("img");
         imgMovie.setAttribute("id", "imgimg-" + i);
@@ -248,7 +183,7 @@ function adddivToCaroussel() {
 
         const divBoxBlack = document.createElement("div");
         divBoxBlack.setAttribute("class", "box-black-opacity-50");
-    
+
         const boxDesc = document.createElement("div");
         boxDesc.setAttribute("class", "box-desc");
 
@@ -265,312 +200,209 @@ function adddivToCaroussel() {
         btnMoreInfo.setAttribute("id", "btn-more-infos-" + i);
         btnMoreInfo.setAttribute("class", "btn-more-infos");
 
+        // const btnPlay = document.createElement("button");
+        // btnPlay.textContent = 'Play';
+        // // btnMoreInfo.setAttribute("id", "btn-more-infos-" + i);
+        // btnMoreInfo.setAttribute("class", "button button-play");
+
         const carousselSnapper = document.createElement("div");
         carousselSnapper.setAttribute("class", "carousel__snapper");
-        const carousselLinkPrev = document.createElement("a");
-        carousselLinkPrev.setAttribute("href", "#carousel__slide" + parseInt(i - 1) + "__cat1");
-        carousselLinkPrev.setAttribute("class", "carousel__prev");
-        const carousselLinkNext = document.createElement("a");
-        carousselLinkNext.setAttribute("href", "#carousel__slide" + parseInt(i + 1) + "__cat1");
-        carousselLinkNext.setAttribute("class", "carousel__next");
 
-        // caroussel slide first and last logic
-        //////
+        const carousselLinkPrev = document.createElement("a");
+        carousselLinkPrev.setAttribute("href", "#carousel__slide" + parseInt(i - 1) + "__cat" + catId);
+        carousselLinkPrev.setAttribute("class", "carousel__prev");
+
+        const carousselLinkNext = document.createElement("a");
+        carousselLinkNext.setAttribute("href", "#carousel__slide" + parseInt(i + 1) + "__cat" + catId);
+        carousselLinkNext.setAttribute("class", "carousel__next");
 
         carousselSnapper.appendChild(carousselLinkPrev);
         carousselSnapper.appendChild(carousselLinkNext);
 
-        // creating the box infos element
+        boxDesc.appendChild(title);
+        divBoxBlack.appendChild(btnMoreInfo);
        
-        
-        boxDesc.appendChild(title);
-        divBoxBlack.appendChild(btnMoreInfo);
         boxDesc.appendChild(idSpan);
         divBoxBlack.appendChild(boxDesc);
         divBoxInfos.appendChild(divBoxBlack);
 
-        cat1.appendChild(imgMovie);
-        cat1.appendChild(divBoxInfos);
-        cat1.appendChild(carousselSnapper);
-        
-        moviesContainerCat1.appendChild(cat1);
+        carouselElement.appendChild(imgMovie);
+        carouselElement.appendChild(divBoxInfos);
+        carouselElement.appendChild(carousselSnapper);
+
+        return carouselElement;
     }
 
-    const moviesContainerCat2 = document.getElementById("carousel__viewport_cat2");
+    function createCategory(catId, from, to) {
+        const moviesContainerCat = document.getElementById("carousel__viewport_cat" + catId);
 
-    for (i = 7; i <= 13; i++) {    
-
-        const cat2 = document.createElement("li");
-        cat2.setAttribute("id", "carousel__slide" + i + "__cat2");
-        cat2.setAttribute("tabindex", "0");
-        cat2.setAttribute("tabindex", "0");
-        cat2.classList.add('carousel__slide');
-
-        const imgMovie = document.createElement("img");
-        imgMovie.setAttribute("id", "imgimg-" + i);
-        imgMovie.setAttribute("tabindex", "0");
-        imgMovie.classList.add('carousel__slide');
-
-        const divBoxInfos = document.createElement("div");
-        divBoxInfos.setAttribute("class", "box-infos box-infos-cat");
-
-        const divBoxBlack = document.createElement("div");
-        divBoxBlack.setAttribute("class", "box-black-opacity-50");
-    
-        const boxDesc = document.createElement("div");
-        boxDesc.setAttribute("class", "box-desc");
-
-        const idSpan = document.createElement("h2");
-        idSpan.setAttribute("id", "idSpan-" + i);
-        idSpan.setAttribute("class", "idSpan");
-
-        const title = document.createElement("h1");
-        title.setAttribute("class", "title-movie");
-        title.setAttribute("id", "title-movie-" + i);
-
-        const btnMoreInfo = document.createElement("button");
-        btnMoreInfo.textContent = 'More infos';
-        btnMoreInfo.setAttribute("id", "btn-more-infos-" + i);
-        btnMoreInfo.setAttribute("class", "btn-more-infos");
-
-        
-        const carousselSnapper = document.createElement("div");
-        carousselSnapper.setAttribute("class", "carousel__snapper");
-        const carousselLinkPrev = document.createElement("a");
-        carousselLinkPrev.setAttribute("href", "#carousel__slide" + parseInt(i - 1) + "__cat2");
-        carousselLinkPrev.setAttribute("class", "carousel__prev");
-        const carousselLinkNext = document.createElement("a");
-        carousselLinkNext.setAttribute("href", "#carousel__slide" + parseInt(i + 1) + "__cat2");
-        carousselLinkNext.setAttribute("class", "carousel__next");
-
-        // caroussel slide first and last logic
-        //////
-
-        carousselSnapper.appendChild(carousselLinkPrev);
-        carousselSnapper.appendChild(carousselLinkNext);
-
-        // creating the box infos element
-
-       
-        boxDesc.appendChild(title);
-        divBoxBlack.appendChild(btnMoreInfo);
-        boxDesc.appendChild(idSpan);
-        divBoxBlack.appendChild(boxDesc);
-        divBoxInfos.appendChild(divBoxBlack);
-
-        cat2.appendChild(imgMovie);
-        cat2.appendChild(divBoxInfos);
-        cat2.appendChild(carousselSnapper);
-        
-        moviesContainerCat2.appendChild(cat2);
+        for (let i = from; i <= to; i++) {
+            const carouselElement = createCarouselElement(i, catId);
+            moviesContainerCat.appendChild(carouselElement);
+        }
     }
 
-    const moviesContainerCat3 = document.getElementById("carousel__viewport_cat3");
-
-    for (i = 14; i <=20; i++) {    
-
-        const cat3 = document.createElement("li");
-        cat3.setAttribute("id", "carousel__slide" + i + "__cat3");
-        cat3.setAttribute("tabindex", "0");
-        cat3.setAttribute("tabindex", "0");
-        cat3.classList.add('carousel__slide');
-
-        const imgMovie = document.createElement("img");
-        imgMovie.setAttribute("id", "imgimg-" + i);
-        imgMovie.setAttribute("tabindex", "0");
-        imgMovie.classList.add('carousel__slide');
-
-        const divBoxInfos = document.createElement("div");
-        divBoxInfos.setAttribute("class", "box-infos box-infos-cat");
-
-        const divBoxBlack = document.createElement("div");
-        divBoxBlack.setAttribute("class", "box-black-opacity-50");
-    
-        const boxDesc = document.createElement("div");
-        boxDesc.setAttribute("class", "box-desc");
-
-        const idSpan = document.createElement("h2");
-        idSpan.setAttribute("id", "idSpan-" + i);
-        idSpan.setAttribute("class", "idSpan");
-
-        const title = document.createElement("h1");
-        title.setAttribute("class", "title-movie");
-        title.setAttribute("id", "title-movie-" + i);
-
-        const btnMoreInfo = document.createElement("button");
-        btnMoreInfo.textContent = 'More infos';
-        btnMoreInfo.setAttribute("id", "btn-more-infos-" + i);
-        btnMoreInfo.setAttribute("class", "btn-more-infos");
-        
-        const carousselSnapper = document.createElement("div");
-        carousselSnapper.setAttribute("class", "carousel__snapper");
-        const carousselLinkPrev = document.createElement("a");
-        carousselLinkPrev.setAttribute("href", "#carousel__slide" + parseInt(i - 1) + "__cat3");
-        carousselLinkPrev.setAttribute("class", "carousel__prev");
-        const carousselLinkNext = document.createElement("a");
-        carousselLinkNext.setAttribute("href", "#carousel__slide" + parseInt(i + 1) + "__cat3");
-        carousselLinkNext.setAttribute("class", "carousel__next");
-
-        // caroussel slide first and last logic
-        //////
-
-        carousselSnapper.appendChild(carousselLinkPrev);
-        carousselSnapper.appendChild(carousselLinkNext);
-
-        // creating the box infos element
-
-        divBoxBlack.appendChild(btnMoreInfo);
-        boxDesc.appendChild(title);
-        boxDesc.appendChild(idSpan);
-        divBoxBlack.appendChild(boxDesc);
-        divBoxInfos.appendChild(divBoxBlack);
-
-        cat3.appendChild(imgMovie);
-        cat3.appendChild(divBoxInfos);
-        cat3.appendChild(carousselSnapper);
-        
-        moviesContainerCat3.appendChild(cat3);
+    for (const category of categories) {
+        createCategory(category.id, category.from, category.to);
     }
-
-    const moviesContainerCat4 = document.getElementById("carousel__viewport_cat4");
-
-    for (i = 21; i <=27; i++) {    
-
-        const cat4 = document.createElement("li");
-        cat4.setAttribute("id", "carousel__slide" + i + "__cat4");
-        cat4.setAttribute("tabindex", "0");
-        cat4.setAttribute("tabindex", "0");
-        cat4.classList.add('carousel__slide');
-
-        const imgMovie = document.createElement("img");
-        imgMovie.setAttribute("id", "imgimg-" + i);
-        imgMovie.setAttribute("tabindex", "0");
-        imgMovie.classList.add('carousel__slide');
-
-        const divBoxInfos = document.createElement("div");
-        divBoxInfos.setAttribute("class", "box-infos box-infos-cat");
-
-        const divBoxBlack = document.createElement("div");
-        divBoxBlack.setAttribute("class", "box-black-opacity-50");
-    
-        const boxDesc = document.createElement("div");
-        boxDesc.setAttribute("class", "box-desc");
-
-        const idSpan = document.createElement("h2");
-        idSpan.setAttribute("id", "idSpan-" + i);
-        idSpan.setAttribute("class", "idSpan");
-
-        const title = document.createElement("h1");
-        title.setAttribute("class", "title-movie");
-        title.setAttribute("id", "title-movie-" + i);
-
-        const btnMoreInfo = document.createElement("button");
-        btnMoreInfo.textContent = 'More infos';
-        btnMoreInfo.setAttribute("id", "btn-more-infos-" + i);
-        btnMoreInfo.setAttribute("class", "btn-more-infos");
-
-        
-        const carousselSnapper = document.createElement("div");
-        carousselSnapper.setAttribute("class", "carousel__snapper");
-        const carousselLinkPrev = document.createElement("a");
-        carousselLinkPrev.setAttribute("href", "#carousel__slide" + parseInt(i - 1) + "__cat4");
-        carousselLinkPrev.setAttribute("class", "carousel__prev");
-        const carousselLinkNext = document.createElement("a");
-        carousselLinkNext.setAttribute("href", "#carousel__slide" + parseInt(i + 1) + "__cat4");
-        carousselLinkNext.setAttribute("class", "carousel__next");
-
-        // caroussel slide first and last logic
-        //////
-
-        carousselSnapper.appendChild(carousselLinkPrev);
-        carousselSnapper.appendChild(carousselLinkNext);
-
-        // creating the box infos element
-        
-        boxDesc.appendChild(title);
-        divBoxBlack.appendChild(btnMoreInfo);
-        boxDesc.appendChild(idSpan);
-        divBoxBlack.appendChild(boxDesc);
-        divBoxInfos.appendChild(divBoxBlack);
-
-        cat4.appendChild(imgMovie);
-        cat4.appendChild(divBoxInfos);
-        cat4.appendChild(carousselSnapper);
-        
-        moviesContainerCat4.appendChild(cat4);
-    }
-
 }
 
 adddivToCaroussel();
 
 
-async function fetchMovieDetailsForCategories(currentId, positionNumber) {
+function addToModal() {
+   
+    const modalInner = document.getElementById("modal-inner");
 
-    // console.log(positionNumber);
-    // console.log(currentId);
+    const modalInnerTop = document.createElement("div");
+    modalInnerTop.setAttribute("class", "modal-inner-top");
+
+    modalInner.appendChild(modalInnerTop);
+
+    const imgModal = document.createElement("img");
+    imgModal.setAttribute("id", "modal-inner-img");
+
+    modalInnerTop.appendChild(imgModal);
+
+    const title = document.createElement("h1");
+    title.setAttribute("class", "modal-inner-title");
+    title.setAttribute("id", "title-movie-big-div-modal");
+
+    modalInnerTop.appendChild(title);
+
+    const modalInnerBottom = document.createElement("div");
+    modalInnerBottom.setAttribute("class", "modal-inner-bottom");
+
+    modalInner.appendChild(modalInnerBottom);
+
+    // genre
+    const pText1 = document.createElement("p");
+    pText1.setAttribute("class", "modal-inner-genre modal-text");
+    pText1.setAttribute("id", "modal-genre-big-div");
+
+    // year
+    const pText2 = document.createElement("p");
+    pText2.setAttribute("class", "modal-inner-year modal-text");
+    pText2.setAttribute("id", "modal-year-big-div");
+
+    // rated
+    const pText3 = document.createElement("p");
+    pText3.setAttribute("class", "modal-inner-rated modal-text");
+    pText3.setAttribute("id", "modal-rated-big-div");
+
+    // score lmbd
+    const pText4 = document.createElement("p");
+    pText4.setAttribute("class", "modal-inner-score-lmdb modal-text");
+    pText4.setAttribute("id", "modal-score-imdb-big-div");
+
+    // director
+    const pText5 = document.createElement("p");
+    pText5.setAttribute("class", "modal-inner-director modal-text");
+    pText5.setAttribute("id", "modal-director-big-div");
+
+    // actor
+    const pText6 = document.createElement("p");
+    pText6.setAttribute("class", "modal-inner-actor-list modal-text");
+    pText6.setAttribute("id", "modal-actor-list-big-div");
+
+    // duration 
+    const pText7 = document.createElement("p");
+    pText7.setAttribute("class", "modal-inner-duration modal-text");
+    pText7.setAttribute("id", "modal-duration-big-div");
+
+    // country origin
+    const pText8 = document.createElement("p");
+    pText8.setAttribute("class", "modal-inner-country-origin modal-text");
+    pText8.setAttribute("id", "modal-country-origin-big-div");
+
+
+    // box office result
+    const pText9 = document.createElement("p");
+    pText9.setAttribute("class", "modal-inner-box-office-result modal-text");
+    pText9.setAttribute("id", "modal-box-office-result-big-div");
+
+    // actor 
+    const pText10 = document.createElement("p");
+    pText10.setAttribute("class", "modal-inner-actor-summary modal-text");
+    pText10.setAttribute("id", "modal-actor-summary-big-div");
+
+    // play button
+
+    const btnPlay = document.createElement("button");
+    btnPlay.textContent = 'Play';
+    btnPlay.setAttribute("class", "button button-play button-modal");
+
+
+    modalInnerBottom.appendChild(pText1);
+    modalInnerBottom.appendChild(pText2);
+    modalInnerBottom.appendChild(pText3);
+    modalInnerBottom.appendChild(pText4);
+    modalInnerBottom.appendChild(pText5);
+    modalInnerBottom.appendChild(pText6);
+    modalInnerBottom.appendChild(pText7);
+    modalInnerBottom.appendChild(pText8);
+    modalInnerBottom.appendChild(pText9);
+    modalInnerBottom.appendChild(pText10);
+    modalInner.appendChild(btnPlay);
+
+}
+
+addToModal();
+
+function addImageToBigDiv() {
+
+    // add image
+    const bigDiv = document.getElementById("big-div-img-box");
+
+    const bigDivImage = document.createElement("img");
+    bigDivImage.setAttribute("id", "big-div-img-0");
+    bigDivImage.setAttribute("src", "");
+    bigDivImage.setAttribute("alt", "movie image");
+
+    bigDiv.appendChild(bigDivImage);
+
+    // add title 
+    const boxDesc = document.getElementById("box-desc");
+
+    const boxDescTitle = document.createElement("h2");
+    boxDescTitle.setAttribute("id", "title-movie-big-div");
+    boxDescTitle.setAttribute("class", "title-movie-big-div");
+
+    boxDesc.appendChild(boxDescTitle);
+
+    // add description 
+    const boxDescText= document.createElement("h2");
+    boxDescText.setAttribute("id", "description-movie-big-div2");
+    boxDescText.setAttribute("class", "description-movie-big-div");
+
+    boxDesc.appendChild(boxDescText);
+}
+
+addImageToBigDiv();
+
+
+
+async function fetchMovieDetailsForCategories(currentId, positionNumber) {
 
     let url = "http://localhost:8000/api/v1/titles/" + currentId;
     // console.log(url);
     let response = await fetch(url);
     let movie = await response.json();
 
-    // console.log(movie);
-    // console.log(movie.image_url);
-    
-    // console.log(movie.image_url);
-    // console.log(movie.genres);
-    // console.log(movie.date_published);
-    // console.log(movie.rated);
-    // console.log(movie.imdb_score);
-    // console.log(movie.directors);
-    // console.log(movie.actors);
-    // console.log(movie.duration);
-    // console.log(movie.countries);
-    // console.log(movie.description);
-
-
-    // // Retrieve the desired movie details
     const title = movie.title;
     const imageUrl = movie.image_url;
-    // const genres = movie.genres;
-    // const date_published = movie.date_published;
-    // const rated = movie.rated;
-    // const imdb_score = movie.imdb_score;
-    // const directors = movie.directors;
-    // const actors = movie.actors;
-    // const duration = movie.duration;
-    // const countries = movie.countries;
-    // const description = movie.description;
 
-    // // console.log(positionNumber);
-    
-    // // Single best movie
-    // if (positionNumber == 0) {
-    //     document.getElementById("title-other-movies-" + [positionNumber]).innerText = title;
-    //     document.getElementById("imgimg-" + [positionNumber]).src = ImageUrl;
-    // }
-
-    // console.log(imageUrl);
-    // console.log(currentId);
     // // // Update the HTML elements with movie details
     document.getElementById("imgimg-"+ [positionNumber]).src = imageUrl;
     document.getElementById("title-movie-" + [positionNumber]).innerText = title;
     document.getElementById("idSpan-" + [positionNumber]).innerText = currentId;
     console.log(currentId);
     console.log(positionNumber);
-    // document.getElementById("title-movie-" + [positionNumber]).setAttribute("onclick", "openModal(" + currentId + ")");
     document.getElementById("btn-more-infos-" + [positionNumber]).setAttribute("onclick", "openModal(" + currentId + ")");
     document.getElementById("imgimg-" + [positionNumber]).setAttribute("onclick", "openModal(" + currentId + ")");
 }
 
-
-
-
-
-// Define another function that uses the id as a parameter
 function someOtherFunction(id) {
-    // Use the id parameter in your logic
     console.log("The best rated movie id is: " + id);
 }
 
@@ -651,6 +483,284 @@ async function searchAndProcessMovies() {
 searchAndProcessSingleMovie();
 
 searchAndProcessMovies();
+
+
+
+// function adddivToCaroussel() {
+
+//     const moviesContainerCat1 = document.getElementById("carousel__viewport_cat1");
+
+//     for (i = 0; i <= 6; i++) {    
+
+//         const cat1 = document.createElement("li");
+//         cat1.setAttribute("id", "carousel__slide" + i + "__cat1");
+//         cat1.setAttribute("tabindex", "0");
+//         cat1.setAttribute("tabindex", "0");
+//         cat1.classList.add('carousel__slide');
+
+//         const imgMovie = document.createElement("img");
+//         imgMovie.setAttribute("id", "imgimg-" + i);
+//         imgMovie.setAttribute("tabindex", "0");
+//         imgMovie.classList.add('carousel__slide');
+
+//         const divBoxInfos = document.createElement("div");
+//         divBoxInfos.setAttribute("class", "box-infos box-infos-cat");
+
+//         const divBoxBlack = document.createElement("div");
+//         divBoxBlack.setAttribute("class", "box-black-opacity-50");
+    
+//         const boxDesc = document.createElement("div");
+//         boxDesc.setAttribute("class", "box-desc");
+
+//         const idSpan = document.createElement("h2");
+//         idSpan.setAttribute("id", "idSpan-" + i);
+//         idSpan.setAttribute("class", "idSpan");
+
+//         const title = document.createElement("h1");
+//         title.setAttribute("class", "title-movie");
+//         title.setAttribute("id", "title-movie-" + i);
+
+//         const btnMoreInfo = document.createElement("button");
+//         btnMoreInfo.textContent = 'More infos';
+//         btnMoreInfo.setAttribute("id", "btn-more-infos-" + i);
+//         btnMoreInfo.setAttribute("class", "btn-more-infos");
+
+//         const carousselSnapper = document.createElement("div");
+//         carousselSnapper.setAttribute("class", "carousel__snapper");
+//         const carousselLinkPrev = document.createElement("a");
+//         carousselLinkPrev.setAttribute("href", "#carousel__slide" + parseInt(i - 1) + "__cat1");
+//         carousselLinkPrev.setAttribute("class", "carousel__prev");
+//         const carousselLinkNext = document.createElement("a");
+//         carousselLinkNext.setAttribute("href", "#carousel__slide" + parseInt(i + 1) + "__cat1");
+//         carousselLinkNext.setAttribute("class", "carousel__next");
+
+//         // caroussel slide first and last logic
+//         //////
+
+//         carousselSnapper.appendChild(carousselLinkPrev);
+//         carousselSnapper.appendChild(carousselLinkNext);
+
+//         // creating the box infos element
+       
+        
+//         boxDesc.appendChild(title);
+//         divBoxBlack.appendChild(btnMoreInfo);
+//         boxDesc.appendChild(idSpan);
+//         divBoxBlack.appendChild(boxDesc);
+//         divBoxInfos.appendChild(divBoxBlack);
+
+//         cat1.appendChild(imgMovie);
+//         cat1.appendChild(divBoxInfos);
+//         cat1.appendChild(carousselSnapper);
+        
+//         moviesContainerCat1.appendChild(cat1);
+//     }
+
+//     const moviesContainerCat2 = document.getElementById("carousel__viewport_cat2");
+
+//     for (i = 7; i <= 13; i++) {    
+
+//         const cat2 = document.createElement("li");
+//         cat2.setAttribute("id", "carousel__slide" + i + "__cat2");
+//         cat2.setAttribute("tabindex", "0");
+//         cat2.setAttribute("tabindex", "0");
+//         cat2.classList.add('carousel__slide');
+
+//         const imgMovie = document.createElement("img");
+//         imgMovie.setAttribute("id", "imgimg-" + i);
+//         imgMovie.setAttribute("tabindex", "0");
+//         imgMovie.classList.add('carousel__slide');
+
+//         const divBoxInfos = document.createElement("div");
+//         divBoxInfos.setAttribute("class", "box-infos box-infos-cat");
+
+//         const divBoxBlack = document.createElement("div");
+//         divBoxBlack.setAttribute("class", "box-black-opacity-50");
+    
+//         const boxDesc = document.createElement("div");
+//         boxDesc.setAttribute("class", "box-desc");
+
+//         const idSpan = document.createElement("h2");
+//         idSpan.setAttribute("id", "idSpan-" + i);
+//         idSpan.setAttribute("class", "idSpan");
+
+//         const title = document.createElement("h1");
+//         title.setAttribute("class", "title-movie");
+//         title.setAttribute("id", "title-movie-" + i);
+
+//         const btnMoreInfo = document.createElement("button");
+//         btnMoreInfo.textContent = 'More infos';
+//         btnMoreInfo.setAttribute("id", "btn-more-infos-" + i);
+//         btnMoreInfo.setAttribute("class", "btn-more-infos");
+
+        
+//         const carousselSnapper = document.createElement("div");
+//         carousselSnapper.setAttribute("class", "carousel__snapper");
+//         const carousselLinkPrev = document.createElement("a");
+//         carousselLinkPrev.setAttribute("href", "#carousel__slide" + parseInt(i - 1) + "__cat2");
+//         carousselLinkPrev.setAttribute("class", "carousel__prev");
+//         const carousselLinkNext = document.createElement("a");
+//         carousselLinkNext.setAttribute("href", "#carousel__slide" + parseInt(i + 1) + "__cat2");
+//         carousselLinkNext.setAttribute("class", "carousel__next");
+
+//         // caroussel slide first and last logic
+//         //////
+
+//         carousselSnapper.appendChild(carousselLinkPrev);
+//         carousselSnapper.appendChild(carousselLinkNext);
+
+//         // creating the box infos element
+
+       
+//         boxDesc.appendChild(title);
+//         divBoxBlack.appendChild(btnMoreInfo);
+//         boxDesc.appendChild(idSpan);
+//         divBoxBlack.appendChild(boxDesc);
+//         divBoxInfos.appendChild(divBoxBlack);
+
+//         cat2.appendChild(imgMovie);
+//         cat2.appendChild(divBoxInfos);
+//         cat2.appendChild(carousselSnapper);
+        
+//         moviesContainerCat2.appendChild(cat2);
+//     }
+
+//     const moviesContainerCat3 = document.getElementById("carousel__viewport_cat3");
+
+//     for (i = 14; i <=20; i++) {    
+
+//         const cat3 = document.createElement("li");
+//         cat3.setAttribute("id", "carousel__slide" + i + "__cat3");
+//         cat3.setAttribute("tabindex", "0");
+//         cat3.setAttribute("tabindex", "0");
+//         cat3.classList.add('carousel__slide');
+
+//         const imgMovie = document.createElement("img");
+//         imgMovie.setAttribute("id", "imgimg-" + i);
+//         imgMovie.setAttribute("tabindex", "0");
+//         imgMovie.classList.add('carousel__slide');
+
+//         const divBoxInfos = document.createElement("div");
+//         divBoxInfos.setAttribute("class", "box-infos box-infos-cat");
+
+//         const divBoxBlack = document.createElement("div");
+//         divBoxBlack.setAttribute("class", "box-black-opacity-50");
+    
+//         const boxDesc = document.createElement("div");
+//         boxDesc.setAttribute("class", "box-desc");
+
+//         const idSpan = document.createElement("h2");
+//         idSpan.setAttribute("id", "idSpan-" + i);
+//         idSpan.setAttribute("class", "idSpan");
+
+//         const title = document.createElement("h1");
+//         title.setAttribute("class", "title-movie");
+//         title.setAttribute("id", "title-movie-" + i);
+
+//         const btnMoreInfo = document.createElement("button");
+//         btnMoreInfo.textContent = 'More infos';
+//         btnMoreInfo.setAttribute("id", "btn-more-infos-" + i);
+//         btnMoreInfo.setAttribute("class", "btn-more-infos");
+        
+//         const carousselSnapper = document.createElement("div");
+//         carousselSnapper.setAttribute("class", "carousel__snapper");
+//         const carousselLinkPrev = document.createElement("a");
+//         carousselLinkPrev.setAttribute("href", "#carousel__slide" + parseInt(i - 1) + "__cat3");
+//         carousselLinkPrev.setAttribute("class", "carousel__prev");
+//         const carousselLinkNext = document.createElement("a");
+//         carousselLinkNext.setAttribute("href", "#carousel__slide" + parseInt(i + 1) + "__cat3");
+//         carousselLinkNext.setAttribute("class", "carousel__next");
+
+//         // caroussel slide first and last logic
+//         //////
+
+//         carousselSnapper.appendChild(carousselLinkPrev);
+//         carousselSnapper.appendChild(carousselLinkNext);
+
+//         // creating the box infos element
+
+//         divBoxBlack.appendChild(btnMoreInfo);
+//         boxDesc.appendChild(title);
+//         boxDesc.appendChild(idSpan);
+//         divBoxBlack.appendChild(boxDesc);
+//         divBoxInfos.appendChild(divBoxBlack);
+
+//         cat3.appendChild(imgMovie);
+//         cat3.appendChild(divBoxInfos);
+//         cat3.appendChild(carousselSnapper);
+        
+//         moviesContainerCat3.appendChild(cat3);
+//     }
+
+//     const moviesContainerCat4 = document.getElementById("carousel__viewport_cat4");
+
+//     for (i = 21; i <=27; i++) {    
+
+//         const cat4 = document.createElement("li");
+//         cat4.setAttribute("id", "carousel__slide" + i + "__cat4");
+//         cat4.setAttribute("tabindex", "0");
+//         cat4.setAttribute("tabindex", "0");
+//         cat4.classList.add('carousel__slide');
+
+//         const imgMovie = document.createElement("img");
+//         imgMovie.setAttribute("id", "imgimg-" + i);
+//         imgMovie.setAttribute("tabindex", "0");
+//         imgMovie.classList.add('carousel__slide');
+
+//         const divBoxInfos = document.createElement("div");
+//         divBoxInfos.setAttribute("class", "box-infos box-infos-cat");
+
+//         const divBoxBlack = document.createElement("div");
+//         divBoxBlack.setAttribute("class", "box-black-opacity-50");
+    
+//         const boxDesc = document.createElement("div");
+//         boxDesc.setAttribute("class", "box-desc");
+
+//         const idSpan = document.createElement("h2");
+//         idSpan.setAttribute("id", "idSpan-" + i);
+//         idSpan.setAttribute("class", "idSpan");
+
+//         const title = document.createElement("h1");
+//         title.setAttribute("class", "title-movie");
+//         title.setAttribute("id", "title-movie-" + i);
+
+//         const btnMoreInfo = document.createElement("button");
+//         btnMoreInfo.textContent = 'More infos';
+//         btnMoreInfo.setAttribute("id", "btn-more-infos-" + i);
+//         btnMoreInfo.setAttribute("class", "btn-more-infos");
+
+        
+//         const carousselSnapper = document.createElement("div");
+//         carousselSnapper.setAttribute("class", "carousel__snapper");
+//         const carousselLinkPrev = document.createElement("a");
+//         carousselLinkPrev.setAttribute("href", "#carousel__slide" + parseInt(i - 1) + "__cat4");
+//         carousselLinkPrev.setAttribute("class", "carousel__prev");
+//         const carousselLinkNext = document.createElement("a");
+//         carousselLinkNext.setAttribute("href", "#carousel__slide" + parseInt(i + 1) + "__cat4");
+//         carousselLinkNext.setAttribute("class", "carousel__next");
+
+//         // caroussel slide first and last logic
+//         //////
+
+//         carousselSnapper.appendChild(carousselLinkPrev);
+//         carousselSnapper.appendChild(carousselLinkNext);
+
+//         // creating the box infos element
+        
+//         boxDesc.appendChild(title);
+//         divBoxBlack.appendChild(btnMoreInfo);
+//         boxDesc.appendChild(idSpan);
+//         divBoxBlack.appendChild(boxDesc);
+//         divBoxInfos.appendChild(divBoxBlack);
+
+//         cat4.appendChild(imgMovie);
+//         cat4.appendChild(divBoxInfos);
+//         cat4.appendChild(carousselSnapper);
+        
+//         moviesContainerCat4.appendChild(cat4);
+//     }
+
+// }
 
 
 

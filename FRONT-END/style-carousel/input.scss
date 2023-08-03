@@ -191,7 +191,6 @@
     border-radius: 50%;
     font-size: 0;
     outline: 0;
-    background-color: rgb(75, 74, 74);
   }
   
   .carousel::before,
@@ -270,11 +269,17 @@
       width: 80%;
       object-fit: cover;
       height: 500px;
+      cursor: pointer;
+      &:hover {
+        width: 85%;
+        height: 550px;
+        transition: 0.3s;
+      }
     }
 
-    .button-play {
-      display: none;
-    } 
+    // .button-play {
+    //   display: none;
+    // } 
 
     .title-movie {
       display: none;

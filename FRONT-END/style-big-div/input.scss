@@ -21,9 +21,13 @@ $navbar-bg-color: rgb(255, 88, 88);
 
 .title-movie-big-div, .description-movie-big-div {
     font-family: "Montserrat", sans-serif;
-    font-size: 30px;
+    font-size: 20px;
     overflow-wrap: break-word;
     color: white;
+}
+
+.title-movie-big-div {
+    font-size: 35px;
 }
 
 .over-layer {
@@ -61,7 +65,7 @@ $navbar-bg-color: rgb(255, 88, 88);
     z-index: 0;
 }
 
-.box-desc {
+#box-desc {
     width: 80%;
     height: 100%;
     display: flex;

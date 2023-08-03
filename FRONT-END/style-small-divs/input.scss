@@ -27,11 +27,12 @@
 .title-movie {
     //position: absolute;
     font-family: "Montserrat", sans-serif;
-    font-size: 40px;
+    font-size: 25px;
     overflow-wrap: break-word;
     color: white;
     z-index: 5;
     margin-top: -40px;
+    margin-left: 10px;
 
 }
 
@@ -42,18 +43,3 @@
     width: 100%;
     height: 50px;
 }
-
-
-// @media only screen and (max-width: 600px) {
-//     .small-divs-main-box {
-//         flex-direction: column;
-//         height: 500vh;
-//         justify-content: space-evenly;
-//     }
-
-//     .small-single-div {
-//         width: 90%;
-//         height: 10%;
-//         background-color: pink;
-//     }
-//   }

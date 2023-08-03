@@ -4,14 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <!-- <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css"> -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="style-navbar/output.css">
-    <link rel="stylesheet" href="style-big-div/output.css">
-    <link rel="stylesheet" href="style-small-divs/output.css">
-    <link rel="stylesheet" href="style-main/output.css">
-    <link rel="stylesheet" href="style-carousel/output.css">
-    <link rel="stylesheet" href="style-dynamic-div/output.css">
+    <link rel="stylesheet" href="main.css"> 
     <script src="script.js" defer></script>
     <script src="scriptModal.js" defer></script>
     <title>Document</title>
@@ -21,40 +14,21 @@
     <main class="main-div">
       
       <!-- MODAL WINDOW HTML -->
-      <!-- <div id="movies-container"></div> -->
       
       <div class="main-blur-screen" id="main-blur-screen" >
      
-        <section class="modal-window">
+        <div class="modal-window">
           <button class="close-button" id="close-button" onclick="closeModal()">
             CLOSE 
           </button>
-          <div class="modal-inner">
-            <div class="modal-inner-top">
-              <img id="modal-inner-img"></img>
-              <h1 class="modal-inner-title" id="title-movie-big-div">movie title</h1>
-            </div>
-            <div class="modal-inner-bottom">
-              <p class="modal-inner-genre modal-text" id="modal-genre-big-div">genre</p>
-              <p class="modal-inner-year modal-text" id="modal-year-big-div"></p>
-              <p class="modal-inner-rated modal-text" id="modal-rated-big-div">rated</p>
-              <p class="modal-inner-score-lmdb modal-text" id="modal-score-lmdb-big-div">score-lmdb</p>
-              <p class="modal-inner-director modal-text" id="modal-director-big-div">director</p>
-              <p class="modal-inner-actor-list modal-text" id="modal-actor-list-big-div">actor-list</p>
-              <p class="modal-inner-duration modal-text" id="modal-duration-big-div">duration</p>
-              <p class="modal-inner-country-origin modal-text" id="modal-country-origin-big-div">country-origin</p>
-              <p class="modal-inner-box-office-result modal-text" id="modal-box-office-result-big-div">office-result</p>
-              <p class="modal-inner-actor-summary modal-text" id="modal-actor-summary-big-div">actor-summary</p>
-            </div>
-            
-          </div>
-        </section>
+          <div class="modal-inner" id="modal-inner"></div>
+        </div>
       </div> 
 
         <header class="header">
               <div class="inner-navbar">
+                <h1 class="just-stream-it-title">JustStreamIt</h1>  
                 <ul class="navbar-ul"> 
-                  <h1 class="just-stream-it-title">JustStreamIt</h1>   
                   <li>Accueil</li>
                   <li>Catégorie</li> 
                 </ul> 
@@ -63,24 +37,21 @@
 
         <div class="big-div">
 
-          <div class="big-div-img-box">
+          <div id="big-div-img-box">
             <div class="over-layer"> 
 
               <div class="box-infos">
                 <div class="box-black-opacity-50">
-                  <div class="box-desc">
-                    <h1 class=" title-movie-big-div" id="title-movie-big-div"></h1> 
-                    <h2 class="description-movie-big-div" id="description-movie-big-div"></h2>
-
+                  <div id="box-desc">
+                    <p id="big-div-movie-id"></p>
                   </div>
-                  <button class="button button-more-info" onclick="openModal()">More Info</button>
+                  <button class="button button-more-info" id="big-div-button-more-info" onclick="openModal()">More Info</button>
                   <button class="button button-play">Play</button>
                 </div> 
        
               </div>
 
             </div>
-            <img id="big-div-img-0">
           </div>
       
         </div>
@@ -89,67 +60,68 @@
 
           <h2 class="category-title">Films les mieux notés</h2>
 
-          <section class="carousel" aria-label="Gallery" id="dynamic-div">
+          <section class="carousel" aria-label="Gallery">
           
             <ol id="carousel__viewport_cat1" class="carousel__viewport">
-
             </ol>
 
             <div class="button-box-cat">
-              <!-- <button class="button button-more-info" onclick="openModal()">More Info</button> -->
-              <button class="button button-play">Play</button>
+          
             </div>
 
           </section>
 
           <h2 class="category-title">Biographies</h2>
 
-          <section class="carousel" aria-label="Gallery" id="dynamic-div">
+          <section class="carousel" aria-label="Gallery">
           
             <ol id="carousel__viewport_cat2" class="carousel__viewport">
-
             </ol>
 
             <div class="button-box-cat">
-              <!-- <button class="button button-more-info" onclick="openModal()">More Info</button> -->
-              <button class="button button-play">Play</button>
+        
             </div>
 
           </section>
 
           <h2 class="category-title">Music</h2>
 
-          <section class="carousel" aria-label="Gallery" id="dynamic-div">
+          <section class="carousel" aria-label="Gallery">
           
             <ol id="carousel__viewport_cat3" class="carousel__viewport">
-
             </ol>
 
             <div class="button-box-cat">
-              <!-- <button class="button button-more-info" onclick="openModal()">More Info</button> -->
-              <button class="button button-play">Play</button>
+            
             </div>
 
           </section>
  
           <h2 class="category-title">Thriller</h2>
 
-          <section class="carousel" aria-label="Gallery" id="dynamic-div">
+          <section class="carousel" aria-label="Gallery">
           
             <ol id="carousel__viewport_cat4" class="carousel__viewport">
-
             </ol>
 
             <div class="button-box-cat">
-              <!-- <button class="button button-more-info" onclick="openModal()">More Info</button> -->
-              <button class="button button-play">Play</button>
+        
             </div>
 
           </section>
 
         </div>
 
-          
+    </main>     
+
+    <!-- <footer class="footer">
+      <p>JustStreamIt</p>
+    </footer> -->
+
+</body>
+    
+    
+
         
 
 

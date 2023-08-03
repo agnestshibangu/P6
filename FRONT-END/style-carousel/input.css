@@ -86,6 +86,7 @@ ol, li {
   right: 0;
   bottom: 0;
   left: 0;
+  height: -moz-fit-content;
   height: fit-content;
   display: flex;
   overflow-y: hidden;
@@ -99,7 +100,8 @@ ol, li {
   position: relative;
   flex: 0 0 100%;
   width: 100%;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
   counter-increment: item;
   height: 600px;
 }
@@ -181,7 +183,6 @@ ol, li {
   border-radius: 50%;
   font-size: 0;
   outline: 0;
-  background-color: rgb(75, 74, 74);
 }
 
 .carousel::before,
@@ -242,7 +243,8 @@ ol, li {
     position: unset;
     flex: 14%;
     width: 80%;
-    object-fit: cover;
+    -o-object-fit: cover;
+       object-fit: cover;
     height: 500px;
     cursor: pointer;
   }
@@ -250,9 +252,6 @@ ol, li {
     width: 85%;
     height: 550px;
     transition: 0.3s;
-  }
-  .button-play {
-    display: none;
   }
   .title-movie {
     display: none;
@@ -271,6 +270,4 @@ ol, li {
     margin-top: 95px;
     display: none;
   }
-}
-
-/*# sourceMappingURL=output.css.map */
+}/*# sourceMappingURL=input.css.map */

@@ -1,3 +1,6 @@
+
+// FETCH DES FILMS POUR CHAQUE CATEGORIE
+
 // 7 best movies all categories 
 async function SearchSevenBestRatedMovie() {
     const url = "http://localhost:8000/api/v1/titles/?sort_by=-imdb_score";
@@ -85,29 +88,16 @@ async function SearchSevenBestRatedMovieCat3() {
     return idListCat3;
 }
 
-
-async function fetchBestMovieDetails(id) {
-
-    const url = "http://localhost:8000/api/v1/titles/" + id;
-    const response = await fetch(url);
-    const movie = await response.json();
-    const title = movie.title;
-    const ImageUrl = movie.image_url;
-    const genres = movie.genres;
-    const date_published = movie.date_published;
-    const rated = movie.rated;
-    const imdb_score = movie.imdb_score;
-    const directors = movie.directors;
-    const actors = movie.actors;
-    const duration = movie.duration;
-    const countries = movie.countries;
-    const description = movie.description;
-
-    document.getElementById("bestRatedMovies-img").src = ImageUrl;
+// Fetch data for single best movies
+async function searchAndProcessSingleMovie() {
+    try {
+        fetchMovieDetails();
+    } catch (error) {
+        console.error(error);
+    }
 }
 
-
-// fetch data for the best movie
+// FETCH DES DONNEES POUR LE MEILLEUR FILM AFFICHE DANS LA GRANDE SECTION DU HAUT
 async function fetchMovieDetails() {
 
     const url = "http://localhost:8000/api/v1/titles/?sort_by=-imdb_score"
@@ -118,17 +108,9 @@ async function fetchMovieDetails() {
 
     const urlResponse = await fetch(movie.url);
     const movieDetails = await urlResponse.json();
-
     const description = movieDetails.description;
     const title = movie.title;
     const ImageUrl = movie.image_url;
-    const genres = movie.genres[0];
-    const year = movie.year;
-    const rated = movie.rated;
-    const directors = movie.directors;
-    const actors = movie.actors;
-    const duration = movie.duration;
-    const countries = movie.countries;
     const id = movie.id;
     
     document.getElementById("title-movie-big-div").innerText = title;
@@ -137,28 +119,49 @@ async function fetchMovieDetails() {
     document.getElementById("big-div-button-more-info").setAttribute("onclick", "openModal(" + id + ")");
 }
 
+async function fetchBestMovieDetails(id) {
 
-function addModalToDOM() {
-
-    const moviesContainer = document.getElementById("movies-container");
-
-
-    const movieDiv = document.createElement("div");
-    const movieImage = document.createElement("img");
-    const movieTitle = document.createElement("h2");
-    const movieButton = document.createElement("button");
-
-    
-    movieTitle.textContent = "add modal title";
-    movieButton.textContent = "Voir les détails";
-
-    movieDiv.appendChild(movieTitle);
-    movieDiv.appendChild(movieButton);
-    
-    moviesContainer.appendChild(movieDiv);
+    const url = "http://localhost:8000/api/v1/titles/" + id;
+    const response = await fetch(url);
+    const movie = await response.json();
+    const ImageUrl = movie.image_url;
+  
+    document.getElementById("bestRatedMovies-img").src = ImageUrl;
 }
 
+function addImageToBigDiv() {
 
+    // add image
+    const bigDiv = document.getElementById("big-div-img-box");
+
+    const bigDivImage = document.createElement("img");
+    bigDivImage.setAttribute("id", "big-div-img-0");
+    bigDivImage.setAttribute("src", "");
+    bigDivImage.setAttribute("alt", "movie image");
+
+    bigDiv.appendChild(bigDivImage);
+
+    // add title 
+    const boxDesc = document.getElementById("box-desc");
+
+    const boxDescTitle = document.createElement("h2");
+    boxDescTitle.setAttribute("id", "title-movie-big-div");
+    boxDescTitle.setAttribute("class", "title-movie-big-div");
+
+    boxDesc.appendChild(boxDescTitle);
+
+    // add description 
+    const boxDescText= document.createElement("h2");
+    boxDescText.setAttribute("id", "description-movie-big-div2");
+    boxDescText.setAttribute("class", "description-movie-big-div");
+
+    boxDesc.appendChild(boxDescText);
+}
+
+addImageToBigDiv();
+
+
+// FONCTION QUI CREE LES 4 CAROUSELS
 function adddivToCaroussel() {
     const categories = [
         { id: 1, from: 0, to: 6 },
@@ -245,7 +248,28 @@ function adddivToCaroussel() {
 
 adddivToCaroussel();
 
+function addModalToDOM() {
 
+    const moviesContainer = document.getElementById("movies-container");
+
+
+    const movieDiv = document.createElement("div");
+    const movieImage = document.createElement("img");
+    const movieTitle = document.createElement("h2");
+    const movieButton = document.createElement("button");
+
+    
+    movieTitle.textContent = "add modal title";
+    movieButton.textContent = "Voir les détails";
+
+    movieDiv.appendChild(movieTitle);
+    movieDiv.appendChild(movieButton);
+    
+    moviesContainer.appendChild(movieDiv);
+}
+
+
+// AFFICHE LE DATA AU SEIN DE LA MODAL
 function addToModal() {
    
     const modalInner = document.getElementById("modal-inner");
@@ -345,39 +369,6 @@ function addToModal() {
 
 addToModal();
 
-function addImageToBigDiv() {
-
-    // add image
-    const bigDiv = document.getElementById("big-div-img-box");
-
-    const bigDivImage = document.createElement("img");
-    bigDivImage.setAttribute("id", "big-div-img-0");
-    bigDivImage.setAttribute("src", "");
-    bigDivImage.setAttribute("alt", "movie image");
-
-    bigDiv.appendChild(bigDivImage);
-
-    // add title 
-    const boxDesc = document.getElementById("box-desc");
-
-    const boxDescTitle = document.createElement("h2");
-    boxDescTitle.setAttribute("id", "title-movie-big-div");
-    boxDescTitle.setAttribute("class", "title-movie-big-div");
-
-    boxDesc.appendChild(boxDescTitle);
-
-    // add description 
-    const boxDescText= document.createElement("h2");
-    boxDescText.setAttribute("id", "description-movie-big-div2");
-    boxDescText.setAttribute("class", "description-movie-big-div");
-
-    boxDesc.appendChild(boxDescText);
-}
-
-addImageToBigDiv();
-
-
-
 async function fetchMovieDetailsForCategories(currentId, positionNumber) {
 
     let url = "http://localhost:8000/api/v1/titles/" + currentId;
@@ -397,20 +388,6 @@ async function fetchMovieDetailsForCategories(currentId, positionNumber) {
     document.getElementById("btn-more-infos-" + [positionNumber]).setAttribute("onclick", "openModal(" + currentId + ")");
     document.getElementById("imgimg-" + [positionNumber]).setAttribute("onclick", "openModal(" + currentId + ")");
 }
-
-function someOtherFunction(id) {
-    console.log("The best rated movie id is: " + id);
-}
-
-// Fetch data for single best movies
-async function searchAndProcessSingleMovie() {
-    try {
-        fetchMovieDetails();
-    } catch (error) {
-        console.error(error);
-    }
-}
-
 
 async function searchAndProcessMovies() {
 

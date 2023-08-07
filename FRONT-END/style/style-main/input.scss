@@ -1,7 +1,7 @@
 html, body {
-  max-width: 100%;
-  background-color: black;
-}
+    max-width: 100%;
+    background-color: black;
+  }
 
 .footer {
   display: flex;
@@ -11,17 +11,20 @@ html, body {
   color: #fff;
   height: 10vh;
   width: 100%;
+  position: fixed;
+  bottom: 0;
+  left: 0;
 }
 
+
 #movies-container {
-  height: 200px;
-  width: 100%;
-  background-color: rgb(89, 89, 89);
+height: 200px;
+width: 100%;
+background-color: rgb(89, 89, 89);
 }
 
 .main-div {
   max-width: 100%;
-  height: -moz-fit-content;
   height: fit-content;
 }
 
@@ -33,15 +36,15 @@ html, body {
 .category-title {
   color: white;
   text-align: center;
-  margin-top: 150px;
+  margin-top: 195px;
 }
 
 .main-div {
   width: 100%;
-  height: -moz-fit-content;
   height: fit-content;
   background-color: black;
   position: relative;
+  
 }
 
 #main-blur-screen {
@@ -55,26 +58,25 @@ html, body {
 
 .modal-window {
   width: 60%;
-  height: -moz-fit-content;
-  height: fit-content;
-  background-color: rgba(148, 148, 151, 0.926);
-  position: fixed;
-  margin: auto;
-  left: 0;
-  right: 0;
-  top: 50%;
-  bottom: 50%;
-  border-radius: 20px;
+    height: fit-content;
+    background-color: rgba(148, 148, 151, 0.926);
+    position: fixed;
+    margin: auto;
+    left: 0;
+    right: 0;
+    top: 50%;
+    bottom: 50%;
+    border-radius: 20px;
 }
+
 
 .button-modal {
-  border-radius: 0 0 10px 10px;
+  border-radius:  0 0 10px 10px;
 }
 
+
 .close-button {
-  width: -moz-fit-content;
   width: fit-content;
-  height: -moz-fit-content;
   height: fit-content;
   padding: 10px 10px;
   background-color: rgb(253, 148, 148);
@@ -86,15 +88,15 @@ html, body {
 
 .modal-inner {
   font-size: 13px;
+
 }
 
 #modal-inner-img {
   height: 200px;
   width: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
-  -o-object-position: 50% 50%;
-     object-position: 50% 50%;
+  object-fit: cover; 
+  object-position: 50% 50%;
+
 }
 
 .modal-inner-title {
@@ -113,4 +115,21 @@ html, body {
 
 .modal-text {
   margin-top: 4px;
-}/*# sourceMappingURL=input.css.map */
+}
+
+
+
+
+@media only screen and (max-width: 600px) {
+  body {
+    height: 4000px;
+  }
+}
+
+
+
+@media only screen and (min-width: 600px) {
+  body {
+    height: 3200px;
+  }
+}

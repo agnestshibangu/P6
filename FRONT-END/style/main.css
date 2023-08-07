@@ -391,6 +391,9 @@ html, body {
   color: #fff;
   height: 10vh;
   width: 100%;
+  position: fixed;
+  bottom: 0;
+  left: 0;
 }
 
 #movies-container {
@@ -412,7 +415,7 @@ html, body {
 .category-title {
   color: white;
   text-align: center;
-  margin-top: 150px;
+  margin-top: 195px;
 }
 
 .main-div {
@@ -488,6 +491,16 @@ html, body {
   margin-top: 4px;
 }
 
+@media only screen and (max-width: 600px) {
+  body {
+    height: 4000px;
+  }
+}
+@media only screen and (min-width: 600px) {
+  body {
+    height: 3200px;
+  }
+}
 .header {
   height: 100px;
   width: 100%;

@@ -1,5 +1,14 @@
 
-// FETCH DES FILMS POUR CHAQUE CATEGORIE
+// FETCH LES IDS DES FILMS POUR CHAQUE CATEGORIE
+
+// Fetch data for single best movie
+async function searchAndProcessSingleMovie() {
+    try {
+        fetchMovieDetails();
+    } catch (error) {
+        console.error(error);
+    }
+}
 
 // 7 best movies all categories 
 async function SearchSevenBestRatedMovie() {
@@ -88,16 +97,6 @@ async function SearchSevenBestRatedMovieCat3() {
     return idListCat3;
 }
 
-// Fetch data for single best movies
-async function searchAndProcessSingleMovie() {
-    try {
-        fetchMovieDetails();
-    } catch (error) {
-        console.error(error);
-    }
-}
-
-// FETCH DES DONNEES POUR LE MEILLEUR FILM AFFICHE DANS LA GRANDE SECTION DU HAUT
 async function fetchMovieDetails() {
 
     const url = "http://localhost:8000/api/v1/titles/?sort_by=-imdb_score"
@@ -119,17 +118,9 @@ async function fetchMovieDetails() {
     document.getElementById("big-div-button-more-info").setAttribute("onclick", "openModal(" + id + ")");
 }
 
-async function fetchBestMovieDetails(id) {
 
-    const url = "http://localhost:8000/api/v1/titles/" + id;
-    const response = await fetch(url);
-    const movie = await response.json();
-    const ImageUrl = movie.image_url;
-  
-    document.getElementById("bestRatedMovies-img").src = ImageUrl;
-}
-
-function addImageToBigDiv() {
+// AFFICHE LES DATAS DU MEILLEUR FILM DANS LA GRANDE SECTION 
+function addInfosToBigDiv() {
 
     // add image
     const bigDiv = document.getElementById("big-div-img-box");
@@ -158,7 +149,7 @@ function addImageToBigDiv() {
     boxDesc.appendChild(boxDescText);
 }
 
-addImageToBigDiv();
+addInfosToBigDiv();
 
 
 // FONCTION QUI CREE LES 4 CAROUSELS
@@ -248,6 +239,7 @@ function adddivToCaroussel() {
 
 adddivToCaroussel();
 
+// FONCTION QUI CREE LA FENETRE MODAL
 function addModalToDOM() {
 
     const moviesContainer = document.getElementById("movies-container");
@@ -267,7 +259,6 @@ function addModalToDOM() {
     
     moviesContainer.appendChild(movieDiv);
 }
-
 
 // AFFICHE LE DATA AU SEIN DE LA MODAL
 function addToModal() {
@@ -369,26 +360,7 @@ function addToModal() {
 
 addToModal();
 
-async function fetchMovieDetailsForCategories(currentId, positionNumber) {
-
-    let url = "http://localhost:8000/api/v1/titles/" + currentId;
-    // console.log(url);
-    let response = await fetch(url);
-    let movie = await response.json();
-
-    const title = movie.title;
-    const imageUrl = movie.image_url;
-
-    // // // Update the HTML elements with movie details
-    document.getElementById("imgimg-"+ [positionNumber]).src = imageUrl;
-    document.getElementById("title-movie-" + [positionNumber]).innerText = title;
-    document.getElementById("idSpan-" + [positionNumber]).innerText = currentId;
-    console.log(currentId);
-    console.log(positionNumber);
-    document.getElementById("btn-more-infos-" + [positionNumber]).setAttribute("onclick", "openModal(" + currentId + ")");
-    document.getElementById("imgimg-" + [positionNumber]).setAttribute("onclick", "openModal(" + currentId + ")");
-}
-
+// FONCTION AUI ATTRIBUE A CHAQUE FILM UN ID ET UN NUMERO DE POSITION POUR POUVOIR RECUPERER DANS LE DOM L ELEMENT CORRESPONDANT
 async function searchAndProcessMovies() {
 
     // 7 meilleurs films
@@ -450,6 +422,26 @@ async function searchAndProcessMovies() {
     } catch (error) {
         console.error(error);
     }
+}
+
+async function fetchMovieDetailsForCategories(currentId, positionNumber) {
+
+    let url = "http://localhost:8000/api/v1/titles/" + currentId;
+    // console.log(url);
+    let response = await fetch(url);
+    let movie = await response.json();
+
+    const title = movie.title;
+    const imageUrl = movie.image_url;
+
+    // // // Update the HTML elements with movie details
+    document.getElementById("imgimg-"+ [positionNumber]).src = imageUrl;
+    document.getElementById("title-movie-" + [positionNumber]).innerText = title;
+    document.getElementById("idSpan-" + [positionNumber]).innerText = currentId;
+    console.log(currentId);
+    console.log(positionNumber);
+    document.getElementById("btn-more-infos-" + [positionNumber]).setAttribute("onclick", "openModal(" + currentId + ")");
+    document.getElementById("imgimg-" + [positionNumber]).setAttribute("onclick", "openModal(" + currentId + ")");
 }
 
 // Call the searchAndProcessMovie function

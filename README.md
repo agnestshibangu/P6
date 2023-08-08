@@ -8,8 +8,6 @@
  5)  Run the server with `$ python manage.py runserver`
 
 
-# ------------------------------------------------------------------------
-
 
 ## Installation the OpenClassrooms project
 

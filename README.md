@@ -1,3 +1,18 @@
+
+## Installation of my project
+
+ 1) `$ git clone https://github.com/agnestshibangu/P6.git`
+ 2) Move to the ocmovies-api root folder with `$ cd P6`
+ 3) Install project dependencies with `pipenv install`
+ 4) Create and populate project database with `pipenv run python manage.py create_db`
+ 5)  Run the server with `$ python manage.py runserver`
+
+
+# ------------------------------------------------------------------------
+
+
+## Installation the OpenClassrooms project
+
 # OCMovies-API: Test API providing movie information
 
 The OCMovies-API project is a REST API application to be executed locally in the context

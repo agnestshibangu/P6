@@ -1,7 +1,7 @@
 
 ## Installation of my project
 
- 1) `$ git clone https://github.com/agnestshibangu/P6.git`
+ 1) clone the project on your local machine with `$ git clone https://github.com/agnestshibangu/P6.git`
  2) Move to the root folder with `$ cd P6`
  3) Install project dependencies with `pipenv install`
  4) Create and populate project database with `pipenv run python manage.py create_db`

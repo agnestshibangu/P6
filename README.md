@@ -5,7 +5,7 @@
  2) Move to the root folder with `$ cd P6`
  3) Install project dependencies with `pipenv install`
  4) Create and populate project database with `pipenv run python manage.py create_db`
- 5)  Run the server with `$ python manage.py runserver`
+ 5)  Run the server with `$ pipenv run python manage.py runserver`
 
 
 
